@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="flex gap-2">
               <img src={logo} className="h-8" alt="Getaway Trip Logo" />
               <span className="self-center text-2xl text-cyan-800 font-semibold whitespace-nowrap">
-                Getaway Trip
+                Getaway Plan
               </span>
             </div>
           </Link>
@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
         <hr className="my-6 border-white sm:mx-auto lg:my-8" />
         <span className="block text-sm  sm:text-center ">
-          © 2024 <Link to="/">Getaway Trip</Link>. All Rights Reserved.
+          © 2024 <Link to="/">Getaway Plan</Link>. All Rights Reserved.
         </span>
       </div>
     </footer>
