@@ -5,6 +5,9 @@ import TourPackages from "../pages/TourPackages";
 import SingleTourPackage from "../pages/SingleTourPackage";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
+import Admin from "../pages/Admin";
+import Category from "../pages/Category";
+import Location from "../pages/Location";
 
 export const AllRoutes = createBrowserRouter([
     {
@@ -35,7 +38,25 @@ export const AllRoutes = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact/>
+            },
+            {
+                path: "/admin",
+                children:[
+                    {
+                        index: true,
+                        element: <Admin/>
+                    },
+                    {
+                        path: "add-category",
+                        element: <Category/>
+                    },
+                    {
+                        path: "add-location",
+                        element: <Location/>
+                    }
+                ]
             }
         ]
-    }
+    },
+    
 ])
