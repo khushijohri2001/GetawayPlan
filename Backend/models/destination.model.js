@@ -19,6 +19,10 @@ const destinationSchema = new mongoose.Schema({
     },
     description: {
         type: String,
+    },
+    category: {
+        type: String,
+        required: true
     }
 }, {timestamps: true})
 

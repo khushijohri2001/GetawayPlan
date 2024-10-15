@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Location = () => {
+const AddDestination = () => {
     const [formData, setFormData] = useState();
 
 
@@ -28,14 +28,14 @@ const Location = () => {
     }
     return (
         <div className='px-10 h-screen py-16'>
-            <h2 className='text-cyan-800 text-2xl font-bold '>Add Location</h2>
+            <h2 className='text-cyan-800 text-2xl font-bold '>Add Destination</h2>
 
             <form action="" onSubmit={submitHandler} className='flex flex-col w-52 gap-6' >
-                <input type="text" placeholder="Type Location Name" name="name" onChange={userInputHandler} className='border border-cyan-800 p-2' />
+                <input type="text" placeholder="Type Destination Name" name="name" onChange={userInputHandler} className='border border-cyan-800 p-2' />
 
-                <input type="number" placeholder="Type Location Price" name="price" onChange={userInputHandler} className='border border-cyan-800 p-2' />
+                <input type="number" placeholder="Type Destination Price" name="price" onChange={userInputHandler} className='border border-cyan-800 p-2' />
 
-                <select placeholder="Choose Location Type" name="type" onChange={userInputHandler} className='border border-cyan-800 p-2' >
+                <select placeholder="Choose Destination Type" name="type" onChange={userInputHandler} className='border border-cyan-800 p-2' >
                     <option value="Domestic">Domestic</option>
                     <option value="International">International</option>
                 </select>
@@ -49,4 +49,4 @@ const Location = () => {
     )
 }
 
-export default Location
+export default AddDestination

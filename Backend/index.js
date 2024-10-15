@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import authRouter from "./routes/auth.route.js";
 import categoryRouter from "./routes/category.route.js";
 import destinationRouter from "./routes/destination.route.js";
+import tourPackageRouter from "./routes/tourPackage.route.js";
 import cors from "cors";
 
 dotenv.config();
@@ -32,6 +33,8 @@ app.use("/auth", authRouter)
 app.use("/category", categoryRouter);
 
 app.use("/destination", destinationRouter);
+
+app.use("/tour-package", tourPackageRouter)
 
 app.get("/", (req, res) => {
     res.send("hello this is server")

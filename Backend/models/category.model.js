@@ -9,11 +9,11 @@ const categorySchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    locations: [
+    destinations: [
         {
-            location: {
+            desination: {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: "Location",
+                ref: "Destination",
             },
         }
     ]

@@ -1,4 +1,6 @@
-const packageSchema = new mongoose.Schema({
+import mongoose from "mongoose"
+
+const tourPackageSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -39,4 +41,4 @@ const packageSchema = new mongoose.Schema({
     }
 })
 
-export const Package = new mongoose.model("Package", packageSchema)
+export const TourPackage = new mongoose.model("TourPackage", tourPackageSchema)

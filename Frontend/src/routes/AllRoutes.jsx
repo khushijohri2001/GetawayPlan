@@ -5,58 +5,76 @@ import TourPackages from "../pages/TourPackages";
 import SingleTourPackage from "../pages/SingleTourPackage";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import Admin from "../pages/Admin";
-import Category from "../pages/Category";
-import Location from "../pages/Location";
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+import AddCategory from "../pages/Admin/AddCategory";
+import AddDestination from "../pages/Admin/AddDestination";
+import AddTourPackage from "../pages/Admin/AddTourPackage";
+import AdminCategoryListing from "../pages/Admin/AdminCategoryListing";
+import AdminWrapper from "../pages/Admin/AdminWrapper";
 
 export const AllRoutes = createBrowserRouter([
     {
         path: "/",
-        element: <App/>,
         children: [
             {
                 path: "/",
-                element: <Home/>
-            },
-            {
-                path: "/tour-packages",
+                element: <App/>,
                 children: [
                     {
                         index: true,
-                        element: <TourPackages/>
+                        element: <Home/>
                     },
                     {
-                        path: ":destination",
-                        element: <SingleTourPackage/>
+                        path: "tour-packages",
+                        children: [
+                            {
+                                index: true,
+                                element: <TourPackages/>
+                            },
+                            {
+                                path: ":destination",
+                                element: <SingleTourPackage/>
+                            }
+                        ]
+                    },
+                    {
+                        path: "about",
+                        element: <About/>
+                    },
+                    {
+                        path: "contact",
+                        element: <Contact/>
                     }
                 ]
             },
+        ]
+        
+    },
+    {
+        path: "admin",
+        element: <AdminWrapper/>,
+        children:[
             {
-                path: "/about",
-                element: <About/>
+                index: true,
+                element: <AdminDashboard/>
             },
             {
-                path: "/contact",
-                element: <Contact/>
+                path: "category",
+                element: <AdminCategoryListing/>
             },
             {
-                path: "/admin",
-                children:[
-                    {
-                        index: true,
-                        element: <Admin/>
-                    },
-                    {
-                        path: "add-category",
-                        element: <Category/>
-                    },
-                    {
-                        path: "add-location",
-                        element: <Location/>
-                    }
-                ]
+                path: "add-category",
+                element: <AddCategory/>
+            },
+            {
+                path: "add-destination",
+                element: <AddDestination/>
+            },
+            {
+                path: "add-tour-package",
+                element: <AddTourPackage/>
             }
         ]
-    },
+    }
     
 ])

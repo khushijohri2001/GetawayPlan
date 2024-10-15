@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-const Category = () => {
+const AddCategory = () => {
     const [formData, setFormData] = useState();
 
 
@@ -27,8 +27,8 @@ const Category = () => {
 
     }
     return (
-        <div className='px-10 h-screen py-16'>
-            <h2 className='text-cyan-800 text-2xl font-bold '>Add Category</h2>
+        <div className=' py-16 h-screen'>
+            <h2 className='text-cyan-800 text-2xl font-bold mb-6'>Add Category</h2>
 
             <form action="" onSubmit={submitHandler} className='flex flex-col w-52 gap-6' >
                 <input type="text" placeholder="Type Category Name" name="name" onChange={userInputHandler} className='border border-cyan-800 p-2' />
@@ -43,4 +43,4 @@ const Category = () => {
 
 }
 
-export default Category
+export default AddCategory
