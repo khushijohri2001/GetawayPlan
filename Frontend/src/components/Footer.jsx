@@ -4,7 +4,7 @@ import { logo } from "../utils/constants";
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-cyan-300 to-cyan-700 shadow text-cyan-200">
-      <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+      <div className="w-full mx-auto p-4 md:py-8">
         <div className="flex items-center justify-between">
           <Link to="/">
             <div className="flex gap-2">
