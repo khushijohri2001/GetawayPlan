@@ -9,16 +9,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    gender: {
-        type: String,
-        enum: ['Male', 'Female', 'Others'],
-        required: true
-    },
-    income: {
-        type: Number,
-        required: true
-    },
-    status: {
+    role: {
         type: String,
         enum: ["User", "Admin"],
         required: true
@@ -28,6 +19,10 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     password: {
+        type: String,
+        required: true
+    },
+    phone: {
         type: String,
         required: true
     }

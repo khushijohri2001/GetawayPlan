@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 const tourPackageSchema = new mongoose.Schema({
-    title: {
+    name: {
         type: String,
         required: true
     },
@@ -10,20 +10,17 @@ const tourPackageSchema = new mongoose.Schema({
         ref: "Category",
         required: true
     },
-    location: {
+    destination: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Location",
+        ref: "Destination",
         required: true
     },
     duration: {
-        type: Date,
+        type: Map,
+        of: String,
         required: true
     },
     price: {
-        type: Number,
-        required: true
-    },
-    type: {
         type: String,
         required: true
     },
@@ -31,12 +28,8 @@ const tourPackageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    food: {
-        type: Map,
-        required: true,
-    },
-    tags: {
-        type: [String],
+    image: {
+        type: String,
         required: true
     }
 })

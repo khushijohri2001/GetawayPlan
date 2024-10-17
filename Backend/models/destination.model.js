@@ -21,9 +21,18 @@ const destinationSchema = new mongoose.Schema({
         type: String,
     },
     category: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Category",
         required: true
-    }
+    },
+    tourPackages: [
+        {
+            tourPackage: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "TourPackage"
+            }
+        }
+    ]
 }, {timestamps: true})
 
 export const Destination = new mongoose.model("Destination", destinationSchema);

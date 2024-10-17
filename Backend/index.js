@@ -5,6 +5,7 @@ import authRouter from "./routes/auth.route.js";
 import categoryRouter from "./routes/category.route.js";
 import destinationRouter from "./routes/destination.route.js";
 import tourPackageRouter from "./routes/tourPackage.route.js";
+import userRouter from "./routes/user.route.js";
 import cors from "cors";
 
 dotenv.config();
@@ -34,7 +35,9 @@ app.use("/category", categoryRouter);
 
 app.use("/destination", destinationRouter);
 
-app.use("/tour-package", tourPackageRouter)
+app.use("/tour-package", tourPackageRouter);
+
+app.use("/user", userRouter);
 
 app.get("/", (req, res) => {
     res.send("hello this is server")

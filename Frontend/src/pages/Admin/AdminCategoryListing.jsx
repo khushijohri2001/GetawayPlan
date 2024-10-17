@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import ListingTable from '../../components/Admin/ListingTable'
 
@@ -10,8 +10,7 @@ const AdminCategoryListing = () => {
                 <button className='font-semibold bg-cyan-600 text-white py-2 px-4 rounded hover:bg-cyan-700'><Link to="/admin/category/add-category">Add Category</Link></button>
             </div>
 
-            <ListingTable/>
-
+            <ListingTable />
         </div>
     )
 }

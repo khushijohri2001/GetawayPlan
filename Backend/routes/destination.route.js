@@ -6,10 +6,10 @@ const router = express.Router();
 // GET ALL
 router.get("/all", async (req, res) => {
     try{
-        const destinations = await Destination.find();
+        const destinations = await Destination.find().populate("category");
         res.status(200).json(destinations)
     } catch(error){
-        res.status(500).json({ message: "Error Fetching Destinations" }) 
+        res.status(500).json({ message: error.message }) 
     }
 });
 
@@ -17,9 +17,9 @@ router.get("/all", async (req, res) => {
 router.get("/:id", async (req, res) => {  // Here Id is Name of the category
     try{
         const destination = await Destination.findOne({name:req.params.id});
-        res.status(200).json(category);
+        res.status(200).json(destination);
     } catch(error){
-        res.status(500).json({ message: "Error Fetching Category by Id" })
+        res.status(500).json({ message: error.message })
     }
 })
 
@@ -30,7 +30,7 @@ router.post("/new", async (req, res) => {
         await newDestination.save()
         res.status(201).json({ message: "Destination Added" })
     } catch(error){
-        res.status(500).json({ message: "Error Creating Location" })
+        res.status(500).json({ message: error.message })
     }
 });
 
@@ -40,7 +40,7 @@ router.delete("/:id", async (req, res) => {  // Here Id is Name of the category
         const destination = await Destination.deleteOne({name:req.params.id});
         res.status(200).json(destination);
     } catch(error){
-        res.status(500).json({ message: "Error Deleting Destination by Id" })
+        res.status(500).json({ message: error.message })
     }
 })
 

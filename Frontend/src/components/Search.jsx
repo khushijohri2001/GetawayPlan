@@ -11,11 +11,11 @@ const Search = () => {
 
             <select className='min-w-52 w-full p-2 border-y border-cyan-800 bg-white'>
                 <option value="">Select Duration</option>
-                <option value="">1-3 Days</option>
-                <option value="">7 Days</option>
-                <option value="">10 Days</option>
-                <option value="">14 Days and more</option>
-                <option value="">Not Decided</option>
+                <option value="1-3 Days">1-3 Days</option>
+                <option value="5-7 Days">5-7 Days</option>
+                <option value="10-12 Days">10-12 Days</option>
+                <option value="15 Days and more">14 Days and more</option>
+                <option value="Not Decided">Not Decided</option>
             </select>
 
             <div className='min-w-52 w-full h-[2.3rem] border border-cyan-800 bg-white  flex items-center justify-between px-2'>

@@ -13,7 +13,7 @@ const ThemeList = () => {
   }, [])
 
   return (
-    <div className='flex gap-4 flex-wrap'>
+    <div className='flex gap-6 flex-wrap'>
       {
         allCategoryData && allCategoryData.length > 0 && allCategoryData.map((category) => <ThemeCard key={category._id} data={category} />)
       }

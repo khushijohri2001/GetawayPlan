@@ -80,7 +80,7 @@ export const tourPackageSlice = createSlice({
       })
       .addCase(postNewTourPackage.rejected, (state, action) => {
         console.error(
-          "Error while creating new destination:",
+          "Error while creating new Tour Package:",
           action.error.message
         );
         state.isLoading = false;
