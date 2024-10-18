@@ -1,10 +1,11 @@
 import express from "express";
 import { Category } from "../models/category.model.js";
+import { adminMiddleware } from "../middleware/adminMiddleware.js";
 
 const router = express.Router();
 
 // GET ALL
-router.get("/all", async (req, res) => {
+router.get("/all",adminMiddleware, async (req, res) => {
     try{
         const categories = await Category.find();
         res.status(200).json(categories)
@@ -24,7 +25,7 @@ router.get("/:id", async (req, res) => {  // Here Id is Name of the category
 })
 
 // CREATE NEW
-router.post("/new", async (req, res) => {
+router.post("/new", adminMiddleware, async (req, res) => {
     try {
         const newCategory = new Category({ ...req.body });
         await newCategory.save()

@@ -2,7 +2,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("/login", (req, res) => {
     res.send("Hello, this is auth endpoint")
 })
 

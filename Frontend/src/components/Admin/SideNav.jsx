@@ -1,7 +1,15 @@
 import { Link } from "react-router-dom"
-import { BookingSvg, CategorySvg, DashboardSvg, DestinationSvg, LoginSvg, SignUp, TourPackageSvg, UserSvg } from "../../assets/svgs"
+import { BookingSvg, CategorySvg, DashboardSvg, DestinationSvg, LoginSvg, Logout, SignUp, TourPackageSvg, UserSvg } from "../../assets/svgs"
+import { useDispatch, useSelector } from "react-redux"
+import {  logoutUser } from "../../redux/slices/userSlice";
 
 const SideNav = () => {
+    const dispatch = useDispatch();
+    const {isAuthenticate} = useSelector((store) => store.user);
+
+    console.log(isAuthenticate);
+    
+
     return (
         <aside id="default-sidebar" className="z-40 w-64 py-4 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
             <div className="h-full px-3 py-4 bg-gray-50">
@@ -13,7 +21,7 @@ const SideNav = () => {
                     <li>
                         <Link to="/admin">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
-                                <DashboardSvg/>
+                                <DashboardSvg />
                                 <span className="ms-3">Dashboard</span>
                             </div>
                         </Link>
@@ -21,7 +29,7 @@ const SideNav = () => {
                     <li>
                         <Link to="/admin/category">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
-                               <CategorySvg/>
+                                <CategorySvg />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Categories</span>
                             </div>
                         </Link>
@@ -29,7 +37,7 @@ const SideNav = () => {
                     <li>
                         <Link to="/admin/destination">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
-                                <DestinationSvg/>
+                                <DestinationSvg />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Destination</span>
                             </div>
                         </Link>
@@ -37,7 +45,7 @@ const SideNav = () => {
                     <li>
                         <Link to="/admin/tour-package">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
-                                <TourPackageSvg/>
+                                <TourPackageSvg />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Tour Packages</span>
                             </div>
                         </Link>
@@ -45,7 +53,7 @@ const SideNav = () => {
                     <li>
                         <Link to="/admin/user">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                               <UserSvg/>
+                                <UserSvg />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Users</span>
                             </div>
                         </Link>
@@ -53,15 +61,15 @@ const SideNav = () => {
                     <li>
                         <Link to="/admin/booking">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                                <BookingSvg/>
+                                <BookingSvg />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Bookings</span>
                             </div>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/signin">
+                        <Link to="/admin/login">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                               <LoginSvg/>
+                                <LoginSvg />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Login</span>
                             </div>
                         </Link>
@@ -69,10 +77,16 @@ const SideNav = () => {
                     <li>
                         <Link to="/admin/signup">
                             <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                                <SignUp/>
+                                <SignUp />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
                             </div>
                         </Link>
+                    </li>
+                    <li onClick={() => dispatch(logoutUser())}>
+                        <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+                            <Logout />
+                            <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
+                        </div>
                     </li>
                 </ul>
             </div>

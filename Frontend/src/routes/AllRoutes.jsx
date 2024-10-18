@@ -15,6 +15,8 @@ import AdminDestinationListing from "../pages/Admin/AdminDestinationListing";
 import AdminTourPackageListing from "../pages/Admin/AdminTourPackageListing";
 import Wrapper from "../components/Wrapper";
 import Destinations from "../pages/Destinations";
+import Login from "../pages/Login";
+import SignUp from "../pages/SignUp";
 
 export const AllRoutes = createBrowserRouter([
     {
@@ -112,9 +114,17 @@ export const AllRoutes = createBrowserRouter([
                                 element: <AddTourPackage />
                             }
                         ]
-                    }
+                    },
                 ]
-            }
+            },
+            {
+                path: "admin/login",
+                element: <Login/>
+            },
+            {
+                path: "admin/signup",
+                element: <SignUp/>
+            },
         ]
     },
     

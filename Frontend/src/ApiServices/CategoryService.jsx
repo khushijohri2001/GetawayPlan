@@ -2,7 +2,7 @@ import axios from "axios";
 import { allCategoriesApi, categoryByIdApi, newCategoryApi } from "../utils/apis";
 
 export const fetchAllCategoriesApi = async () => {
-  const response = await axios.get(allCategoriesApi);
+  const response = await axios.get(allCategoriesApi, {withCredentials:true});
   
   return response.data;
 };
@@ -14,7 +14,7 @@ export const fetchCategoryByIdApi = async (id) => {
   };
 
   export const postNewCategoryApi = async (data) => {
-    const response = await axios.post(newCategoryApi, data);
+    const response = await axios.post(newCategoryApi, data, {withCredentials:true});
     
     return response.data;
   };

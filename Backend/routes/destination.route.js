@@ -16,7 +16,7 @@ router.get("/all", async (req, res) => {
 // GET
 router.get("/:id", async (req, res) => {  // Here Id is Name of the category
     try{
-        const destination = await Destination.findOne({name:req.params.id});
+        const destination = await Destination.findOne({name:req.params.id}).populate("category");
         res.status(200).json(destination);
     } catch(error){
         res.status(500).json({ message: error.message })

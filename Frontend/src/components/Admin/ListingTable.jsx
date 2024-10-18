@@ -85,8 +85,6 @@ const ListingTable = () => {
             
         }
     }, [tableHead, allCategoryData, allDestinationData, allTourPackageData])
-    
-    console.log(allTourPackageData);
 
     return (
         <div className="shadow-md border border-cyan-700">
@@ -95,7 +93,7 @@ const ListingTable = () => {
                     <tr>
                         {
                             tableHead.map((name) => (
-                                <th scope="col" className="px-6 py-3">
+                                <th scope="col" className="px-6 py-3" key={name}>
                                     {name}
                                 </th>
                             ))
@@ -115,7 +113,7 @@ const ListingTable = () => {
                                 <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     {
                                         bodyHead.map(head => (
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-4" key={head}>
                                                 {bodyData[head]}
                                             </td>
                                         ))

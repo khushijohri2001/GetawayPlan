@@ -7,25 +7,35 @@ import destinationRouter from "./routes/destination.route.js";
 import tourPackageRouter from "./routes/tourPackage.route.js";
 import userRouter from "./routes/user.route.js";
 import cors from "cors";
+import { adminMiddleware } from "./middleware/adminMiddleware.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
 
-const connect = async() => {
+const connect = async () => {
     try {
         await mongoose.connect(process.env.MONGODB);
         console.log("connected to mongodb")
-      } catch (error) {
+    } catch (error) {
         console.log(error)
-      }
+    }
 }
 
 mongoose.connection.on("disconnected", () => {
     console.log("mongoDB disconnected")
 })
 
+app.use(cookieParser());
 
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+    origin: "http://localhost:5173/",
+    credentials:true,
+    sameSite:"None"
+}));
+
 app.use(express.json())
 
 // Middleware

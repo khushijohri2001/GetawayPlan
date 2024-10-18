@@ -17,7 +17,7 @@ router.get("/all", async (req, res) => {
 // GET ALL
 router.get("/:id", async (req, res) => {
     try{
-        const tourPackage = await TourPackage.findById(req.params.id);
+        const tourPackage = await TourPackage.findById(req.params.id).populate("category").populate("destination");
         res.status(200).json(tourPackage);
     } catch(error){
         res.status(500).json({ message: error.message })
