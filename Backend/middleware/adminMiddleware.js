@@ -2,12 +2,12 @@ import jwt from "jsonwebtoken";
 
 export const adminMiddleware = async (req, res, next) => {
   const token = req.cookies.auth_token;
-  console.log(token, "in middleware");
+  // console.log(req);
   
+
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decoded;
-      console.log(req.user)
       if(req.user.role ==='Admin'){
         next()
       }

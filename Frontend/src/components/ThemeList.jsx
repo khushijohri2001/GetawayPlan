@@ -12,6 +12,8 @@ const ThemeList = () => {
     dispatch(fetchAllCategories())
   }, [])
 
+  
+
   return (
     <div className='flex gap-6 flex-wrap'>
       {

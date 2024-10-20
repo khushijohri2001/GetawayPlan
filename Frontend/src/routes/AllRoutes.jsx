@@ -17,6 +17,9 @@ import Wrapper from "../components/Wrapper";
 import Destinations from "../pages/Destinations";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
+import AdminUserListing from "../pages/Admin/AdminUserListing";
+import AdminRoute from "./AdminRoute";
+import ProtectedRoute from "./ProtectedRoute";
 
 export const AllRoutes = createBrowserRouter([
     {
@@ -36,25 +39,11 @@ export const AllRoutes = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <Destinations/>,
+                                element: <ProtectedRoute element={<Destinations/>} />,
                             },
                             {
                                 path: ":destinationId",
-                                element: <TourPackages />
-                            }
-                        ]
-
-                    },
-                    {
-                        path: ":destination",
-                        children: [
-                            {
-                                index: true,
-                                element: <TourPackages />
-                            },
-                            {
-                                path: ":destination",
-                                element: <SingleTourPackage />
+                                element: <ProtectedRoute element={<TourPackages />} />
                             }
                         ]
                     },
@@ -65,12 +54,20 @@ export const AllRoutes = createBrowserRouter([
                     {
                         path: "contact",
                         element: <Contact />
-                    }
+                    },
+                    {
+                        path: "login",
+                        element: <Login/>
+                    },
+                    {
+                        path: "signup",
+                        element: <SignUp/>
+                    },
                 ]
             },
             {
                 path: "admin",
-                element: <AdminWrapper />,
+                element: <AdminRoute element={<AdminWrapper />} />,
                 children: [
                     {
                         index: true,
@@ -111,6 +108,19 @@ export const AllRoutes = createBrowserRouter([
                             },
                             {
                                 path: "add-tour-package",
+                                element: <AddTourPackage />
+                            }
+                        ]
+                    },
+                    {
+                        path: "user",
+                        children: [
+                            {
+                                index: true,
+                                element: <AdminUserListing />,
+                            },
+                            {
+                                path: "add-user",
                                 element: <AddTourPackage />
                             }
                         ]

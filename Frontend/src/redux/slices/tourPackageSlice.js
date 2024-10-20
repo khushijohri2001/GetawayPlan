@@ -29,8 +29,16 @@ export const tourPackageSlice = createSlice({
     singleTourPackageData: null,
     isLoading: false,
     error: null,
+    isPopupOpen: false,
   },
-  reducers: {},
+  reducers: {
+    openPopup: (state, action) => {
+      state.isPopupOpen = true
+    },
+    closePopup: (state, action) => {
+      state.isPopupOpen = false
+    }
+  },
   extraReducers: (builder) => {
     builder
 
@@ -107,5 +115,5 @@ export const tourPackageSlice = createSlice({
 });
 
 export default tourPackageSlice.reducer;
-export const {  allTourPackageData, singleTourPackageData } = tourPackageSlice.actions;
+export const { openPopup, closePopup } = tourPackageSlice.actions;
 export { fetchAllTourPackages, fetchTourPackageById, postNewTourPackage, deleteTourPackage };

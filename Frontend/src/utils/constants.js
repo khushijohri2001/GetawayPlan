@@ -1,1 +1,2 @@
-export const logo = "https://img.freepik.com/free-vector/detailed-travel-logo_23-2148616611.jpg?size=338&ext=jpg&ga=GA1.1.1369675164.1728691200&semt=ais_hybrid-rr-similar"
+export const logo = "https://img.freepik.com/free-vector/detailed-travel-logo_23-2148616611.jpg?size=338&ext=jpg&ga=GA1.1.1369675164.1728691200&semt=ais_hybrid-rr-similar";
+export const userImage = "https://img.freepik.com/premium-vector/female-user-profile-avatar-is-woman-character-screen-saver-with-emotions_505620-617.jpg"

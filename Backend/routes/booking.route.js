@@ -1,6 +1,5 @@
 import express from "express";
-import { Category } from "../models/category.model.js";
-import { adminMiddleware } from "../middleware/adminMiddleware.js";
+import { Booking } from "../models/booking.model.js";
 
 const router = express.Router();
 
@@ -8,8 +7,8 @@ const router = express.Router();
 router.get("/all", async (req, res) => {
     
     try{
-        const categories = await Category.find();
-        res.status(200).json(categories)
+        const bookings = await Booking.find();
+        res.status(200).json(bookings)
     } catch(error){
         res.status(500).json({ message: error.message }) 
     }
@@ -18,8 +17,8 @@ router.get("/all", async (req, res) => {
 // GET
 router.get("/:id", async (req, res) => {  // Here Id is Name of the category
     try{
-        const category = await Category.findOne({name:req.params.id});
-        res.status(200).json(category);
+        const booking = await Booking.findOne({name:req.params.id});
+        res.status(200).json(booking);
     } catch(error){
         res.status(500).json({ message: error.message })
     }
@@ -28,9 +27,9 @@ router.get("/:id", async (req, res) => {  // Here Id is Name of the category
 // CREATE NEW
 router.post("/new", async (req, res) => {
     try {
-        const newCategory = new Category({ ...req.body });
-        await newCategory.save()
-        res.status(201).json({ message: "Category Added" })
+        const newBooking = new Booking({ ...req.body });
+        await newBooking.save()
+        res.status(201).json({ message: "Booking Added" })
     } catch (error) { 
         res.status(500).json({ message: error.message }) 
     }
@@ -40,8 +39,8 @@ router.post("/new", async (req, res) => {
 // DELETE
 router.delete("/:id", async (req, res) => {  // Here Id is Name of the category
     try{
-        const category = await Category.deleteOne({name:req.params.id});
-        res.status(200).json(category);
+        const booking = await Booking.deleteOne({name:req.params.id});
+        res.status(200).json(booking);
     } catch(error){
         res.status(500).json({ message: error.message })
     }

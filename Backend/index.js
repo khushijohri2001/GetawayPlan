@@ -5,15 +5,17 @@ import authRouter from "./routes/auth.route.js";
 import categoryRouter from "./routes/category.route.js";
 import destinationRouter from "./routes/destination.route.js";
 import tourPackageRouter from "./routes/tourPackage.route.js";
+import bookingRouter from "./routes/booking.route.js";
 import userRouter from "./routes/user.route.js";
 import cors from "cors";
-import { adminMiddleware } from "./middleware/adminMiddleware.js";
 import cookieParser from "cookie-parser";
+
+// Update mongo password in env = khushijohri2001, ZkjRqdeIT5cEarwX, WioL4io4n9N8XLhi
 
 dotenv.config();
 const app = express();
 
-const connect = async () => {
+const connect = async () => {   
     try {
         await mongoose.connect(process.env.MONGODB);
         console.log("connected to mongodb")
@@ -28,7 +30,7 @@ mongoose.connection.on("disconnected", () => {
 
 app.use(cookieParser());
 
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
     origin: "http://localhost:5173/",
@@ -46,6 +48,8 @@ app.use("/category", categoryRouter);
 app.use("/destination", destinationRouter);
 
 app.use("/tour-package", tourPackageRouter);
+
+app.use("/booking", bookingRouter);
 
 app.use("/user", userRouter);
 

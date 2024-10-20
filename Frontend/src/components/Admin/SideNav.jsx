@@ -1,15 +1,11 @@
 import { Link } from "react-router-dom"
 import { BookingSvg, CategorySvg, DashboardSvg, DestinationSvg, LoginSvg, Logout, SignUp, TourPackageSvg, UserSvg } from "../../assets/svgs"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import {  logoutUser } from "../../redux/slices/userSlice";
 
 const SideNav = () => {
     const dispatch = useDispatch();
-    const {isAuthenticate} = useSelector((store) => store.user);
-
-    console.log(isAuthenticate);
     
-
     return (
         <aside id="default-sidebar" className="z-40 w-64 py-4 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
             <div className="h-full px-3 py-4 bg-gray-50">

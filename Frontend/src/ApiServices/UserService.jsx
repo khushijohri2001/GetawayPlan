@@ -1,46 +1,47 @@
 import axios from "axios";
-import { allUsersApi, loginApi, logoutApi, newUserApi, userByIdApi } from "../utils/apis";
+import { baseUrl } from "../utils/apis";
 
 export const fetchAllUsersApi = async () => {
-    const response = await axios.get(allUsersApi);
+  const response = await axios.get(baseUrl + "/user/all");
 
-    return response.data;
+  return response.data;
 };
 
 export const fetchUserByIdApi = async (id) => {
-    const response = await axios.get(userByIdApi(id));
+  const response = await axios.get(baseUrl + "/user/singleUser" + id);
 
-    return response.data;
+  return response.data;
 };
 
 export const postNewUserApi = async (data) => {
-    const response = await axios.post(newUserApi, data);
+  const response = await axios.post(baseUrl + "/user/new", data);
 
-    return response.data;
+  return response.data;
 };
 
 export const deleteUserApi = async (id) => {
-    const response = await axios.delete(userByIdApi(id));
+  const response = await axios.delete(baseUrl + "/user/singleUser" + id);
 
-    return response.data;
+  return response.data;
 };
 
 export const loginUserApi = async (data) => {
-    const response = await axios.post(loginApi, data, {withCredentials:true});
+  const response = await axios.post(baseUrl + "/user/login", data, {
+    withCredentials: true,
+  });
 
-    return response.data;
+  return response.data;
 };
 
 export const logoutUserApi = async () => {
-    console.log("chla");
-    
-    try {
-        const response = await axios.get("http://localhost:8800/user/logout",{withCredentials:true} );
-        console.log("chla 2");
-        
-        return response.data;
-    } catch (error) {
-        console.log(error)
-    }
+  try {
+    const response = await axios.get(baseUrl + "/user/logout", {
+      withCredentials: true,
+    });
+    console.log(response.data);
 
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };

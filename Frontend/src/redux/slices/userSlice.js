@@ -37,11 +37,20 @@ export const userSlice = createSlice({
   initialState: {
     allUserData: [],
     singleUserData: null,
-    isAuthenticate: false,
+    isAuthenticated: false,
     isLoading: false,
     error: null,
+    invalidRoleError: false
   },
-  reducers: {},
+  reducers: {
+    notAdminError: (state, action) => {
+      state.invalidRoleError = true
+    },
+    resetError: (state, action) => {
+      state.invalidRoleError = false
+      state.error = false
+    }
+  },
   extraReducers: (builder) => {
     builder
 
@@ -52,15 +61,11 @@ export const userSlice = createSlice({
       })
       .addCase(fetchAllUsers.fulfilled, (state, action) => {
         state.allUserData = action.payload;
-        state.ifetchUserByIdsLoading = false;
+        state.isLoading = false;
       })
       .addCase(fetchAllUsers.rejected, (state, action) => {
-        console.error(
-          "Error while fetching all users:",
-          action.error.message
-        );
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = "Error while fetching all users";
       })
 
       // GET
@@ -73,12 +78,8 @@ export const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(fetchUserById.rejected, (state, action) => {
-        console.error(
-          "Error while fetching user by id:",
-          action.error.message
-        );
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = "Error while fetching use";
       })
 
       // POST
@@ -90,12 +91,8 @@ export const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(postNewUser.rejected, (state, action) => {
-        console.error(
-          "Error while creating new user:",
-          action.error.message
-        );
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = "Error while creating new user";
       })
 
       // DELETE
@@ -107,12 +104,8 @@ export const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(deleteUser.rejected, (state, action) => {
-        console.error(
-          "Error while deleting user by id:",
-          action.error.message
-        );
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = "Error while deleting user";
       })
       
       // LOGIN
@@ -121,16 +114,13 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
-        state.isAuthenticate = true;
+        state.singleUserData = action.payload
+        state.isAuthenticated = true;
         state.isLoading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        console.error(
-          "Error while logging in user:",
-          action.error.message
-        );
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error ="Error while logging in"
       })
 
       // LOGOUT
@@ -139,20 +129,16 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
-        state.isAuthenticate = false;
+        state.isAuthenticated = false;
         state.isLoading = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
-        console.error(
-          "Error while logging out user:",
-          action.error.message
-        );
         state.isLoading = false;
-        state.error = action.error.message;
+        state.error = "Error while logging out user";
       });
   },
 });
 
 export default userSlice.reducer;
-export const { allUserData, singleUserData, isAuthenticate } = userSlice.actions;
+export const { notAdminError, resetError } = userSlice.actions;
 export { fetchAllUsers, fetchUserById, postNewUser, deleteUser, loginUser, logoutUser };

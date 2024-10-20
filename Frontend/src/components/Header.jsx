@@ -3,7 +3,7 @@ import {logo} from "../utils/constants"
 
 const Header = () => {
   return (
-    <div className="bg-gradient-to-r from-cyan-300 to-cyan-700 py-4 px-10 flex justify-between items-center sticky top-0">
+    <div className="bg-gradient-to-r from-cyan-300 to-cyan-700 py-4 px-10 flex justify-between items-center sticky top-0 z-50">
       <img
         src={logo}
         alt="Logo"
