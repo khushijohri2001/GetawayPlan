@@ -20,6 +20,7 @@ import SignUp from "../pages/SignUp";
 import AdminUserListing from "../pages/Admin/AdminUserListing";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
+import AdminBookingListing from "../pages/Admin/AdminBookingListing";
 
 export const AllRoutes = createBrowserRouter([
     {
@@ -122,6 +123,15 @@ export const AllRoutes = createBrowserRouter([
                             {
                                 path: "add-user",
                                 element: <AddTourPackage />
+                            }
+                        ]
+                    },
+                    {
+                        path: "booking",
+                        children: [
+                            {
+                                index: true,
+                                element: <AdminBookingListing />,
                             }
                         ]
                     },

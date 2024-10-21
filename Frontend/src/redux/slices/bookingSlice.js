@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteBookingApi, fetchAllBookingsApi, fetchBookingByIdApi, postNewBookingApi } from "../../ApiServices/BookingService";
+import { deleteBookingApi, fetchAllBookingsApi, fetchBookingByIdApi, postNewBookingApi, updateBookingApi } from "../../ApiServices/BookingService";
 
 const fetchAllBookings = createAsyncThunk("booking/fetchAllBookings", async () => {
     return fetchAllBookingsApi();
@@ -18,6 +18,11 @@ const postNewBooking = createAsyncThunk("booking/postNewBooking", async (data) =
 
 const deleteBooking = createAsyncThunk("booking/deleteBooking", async (id) => {
     return deleteBookingApi(id);
+  }
+);
+
+const updateBooking = createAsyncThunk("booking/updateBooking", async ({id, status}) => {
+    return updateBookingApi(id, status);
   }
 );
 
@@ -101,10 +106,28 @@ export const bookingSlice = createSlice({
         );
         state.isLoading = false;
         state.error = action.error.message;
+      })
+
+      // UPDATE
+      .addCase(updateBooking.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateBooking.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const bookedTourPackage = state.allBookingData.find((booking) => booking._id === action.payload.id);
+        if (bookedTourPackage) {
+          bookedTourPackage.status = action.payload.status
+          // state.allBookingData[index] = action.payload; 
+        }
+      })
+      .addCase(updateBooking.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export default bookingSlice.reducer;
 // export const { } = bookingSlice.actions;
-export { fetchAllBookings, fetchBookingById, postNewBooking, deleteBooking };
+export { fetchAllBookings, fetchBookingById, postNewBooking, deleteBooking, updateBooking };
