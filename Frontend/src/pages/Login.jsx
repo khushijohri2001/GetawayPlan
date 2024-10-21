@@ -11,7 +11,7 @@ let init = {
 const Login = () => {
   const [formData, setFormData] = useState(init);
 
-  const { isAuthenticated, singleUserData, error } = useSelector(
+  const { singleUserData, error } = useSelector(
     (store) => store.user
   );
 
@@ -38,15 +38,18 @@ const Login = () => {
     dispatch(resetError());
   };
 
+  
+
   useEffect(() => {
-    if (isAuthenticated && singleUserData){
-      if(isAdminRoute){
+    if (singleUserData){
+      if(isAdminRoute && singleUserData.role === "Admin"){
         navigate("/admin");
       } else{
         navigate("/")
       }
     } 
-  }, [isAuthenticated, singleUserData, isAdminRoute]);
+  }, [ singleUserData, isAdminRoute]);
+  
 
   return (
     <div className="w-full p-10">

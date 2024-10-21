@@ -19,7 +19,7 @@ const AddCategory = () => {
 
         dispatch(postNewCategory(formData))
         setFormData(init);
-        navigate("/admin/category")
+        navigate(-1)
     }
 
     const userInputHandler = (e) => {
@@ -34,7 +34,7 @@ const AddCategory = () => {
 
             <form onSubmit={submitHandler} className='flex flex-col w-80 gap-6' >
                 <label htmlFor="">Enter Category Name
-                    <input type="text" name="name" value={formData.name} placeholder="Type Category Name" onChange={userInputHandler} className='border border-cyan-800 p-2 w-full'  />
+                    <input type="text" name="name" value={formData.name} placeholder="Type Category Name" onChange={userInputHandler} className='border border-cyan-800 p-2 w-full' />
                 </label>
 
                 {/* Update: Uploading images from system and convert them through Multer */}

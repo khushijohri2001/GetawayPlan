@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
-import {logo} from "../utils/constants"
+import { logo } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../redux/slices/userSlice";
 
 const Header = () => {
+  const { singleUserData } = useSelector((store) => store.user);
+
+  const dispatch = useDispatch();
+
   return (
     <div className="bg-gradient-to-r from-cyan-300 to-cyan-700 py-4 px-10 flex justify-between items-center sticky top-0 z-50">
       <img
@@ -25,9 +31,11 @@ const Header = () => {
         <li className="hover:text-white">
           <Link to="/contact">Contact</Link>
         </li>
-        <li className="hover:text-white">
-          <Link to="/login">Login</Link>
-        </li>
+
+        {
+          singleUserData ? <li className="hover:text-white" onClick={() => dispatch(logoutUser())}>Logout</li> : <li className="hover:text-white"><Link to="/login">Login</Link></li>
+        }
+
       </ul>
     </div>
   );

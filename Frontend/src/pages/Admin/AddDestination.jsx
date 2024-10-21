@@ -72,8 +72,6 @@ const AddDestination = () => {
     dispatch(fetchAllTourPackages());
   }, []);
 
-  console.log(allTourPackageData);
-
 
   return (
     <div className="px-10 h-screen py-16">
@@ -140,7 +138,6 @@ const AddDestination = () => {
             // onChange={userInputHandler}
             className="border border-cyan-800 p-2 w-full"
           >
-            <option value="">Choose Destination Category</option>
             {allCategoryData &&
               allCategoryData.length > 0 &&
               allCategoryData.map((category) => (

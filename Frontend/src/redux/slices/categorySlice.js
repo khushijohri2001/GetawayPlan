@@ -75,6 +75,7 @@ export const categorySlice = createSlice({
         state.error = null;
       })
       .addCase(postNewCategory.fulfilled, (state, action) => {
+        state.allCategoryData=[...state.allCategoryData,action.payload]
         state.isLoading = false;
       })
       .addCase(postNewCategory.rejected, (state, action) => {

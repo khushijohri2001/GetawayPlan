@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { postNewUser } from "../redux/slices/userSlice";
@@ -19,6 +19,7 @@ const SignUp = () => {
   const location = useLocation();
 
   const { error } = useSelector((store) => store.user);
+  const { singleUserData, isAuthenticated } = useSelector((store) => store.user);
 
   const currentPath = location.pathname;
 
@@ -30,7 +31,6 @@ const SignUp = () => {
     dispatch(postNewUser(formData));
 
     setFormData(init);
-    navigate("/admin/login");
   };
 
   const userInputHandler = (e) => {
@@ -38,6 +38,19 @@ const SignUp = () => {
 
     setFormData((data) => ({ ...data, [name]: value }));
   };
+
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (isAdminRoute ) {
+        navigate("/admin/login");
+      } else {
+        navigate("/login")
+      }
+    }
+  }, [isAuthenticated]);
+
+  
 
   return (
     <div className="w-full p-10">
@@ -148,7 +161,9 @@ const SignUp = () => {
         <div className="my-5">{error && error}</div>
 
         <div className="flex items-start my-5 text-sm font-medium ">
-          Already an account? <span className="text-cyan-500 px-2"><Link to="/admin/login">Login now</Link></span>
+          Already an account? <span className="text-cyan-500 px-2">
+            <Link to={isAdminRoute ? "/admin/login" : "/login"}>Login now</Link>
+          </span>
         </div>
       </form>
     </div>

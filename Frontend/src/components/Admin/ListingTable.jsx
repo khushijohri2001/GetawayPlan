@@ -20,6 +20,8 @@ const ListingTable = ({ tableHead, lastTableHead, data, obj }) => {
 
             continue;
           } else if(key === "category"){
+            console.log(el[key]);
+            
             obj[key] = el[key].map((ele) => ele.name).join(", ")
             
           }else{

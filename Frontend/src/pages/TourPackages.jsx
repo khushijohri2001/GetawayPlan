@@ -5,12 +5,15 @@ import { useEffect } from "react";
 import { fetchAllTourPackages } from "../redux/slices/tourPackageSlice";
 import TourPackageCard from "../components/Cards/TourPackageCard";
 import { fetchDestinationById } from "../redux/slices/destinationSlice";
+import { fetchAllBookings } from "../redux/slices/bookingSlice";
 
 const TourPackages = () => {
   const { categoryId, destinationId } = useParams();
 
   const { allTourPackageData } = useSelector((store) => store.tourPackage);
   const { singleDestinationData } = useSelector((store) => store.destination);
+  const { singleUserData } = useSelector((store) => store.user);
+  
 
   const dispatch = useDispatch();
 
@@ -18,6 +21,8 @@ const TourPackages = () => {
     dispatch(fetchAllTourPackages());
     dispatch(fetchDestinationById(destinationId));
   }, []);
+
+
 
   return (
     <div>
@@ -37,15 +42,15 @@ const TourPackages = () => {
           allTourPackageData.length > 0 &&
           (categoryId === "destinations"
             ? allTourPackageData
-                .filter((ele) => ele?.destination?.name === destinationId)
-                .map((data) => <TourPackageCard key={data._id} data={data} />)
+              .filter((ele) => ele?.destination?.name === destinationId)
+              .map((data) => <TourPackageCard key={data._id} data={data} userId={singleUserData._id} />)
             : allTourPackageData
-                .filter(
-                  (ele) =>
-                    ele?.destination?.name === destinationId &&
-                    ele?.category?.name === categoryId
-                )
-                .map((data) => <TourPackageCard key={data._id} data={data} />))}
+              .filter(
+                (ele) =>
+                  ele?.destination?.name === destinationId &&
+                  ele?.category?.name === categoryId
+              )
+              .map((data) => <TourPackageCard key={data._id} data={data} userId={singleUserData._id} />))}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/all", async (req, res) => {
     
     try{
-        const bookings = await Booking.find();
+        const bookings = await Booking.find().populate("user").populate("tourPackage");
         res.status(200).json(bookings)
     } catch(error){
         res.status(500).json({ message: error.message }) 
@@ -33,7 +33,6 @@ router.post("/new", async (req, res) => {
     } catch (error) { 
         res.status(500).json({ message: error.message }) 
     }
-
 });
 
 // DELETE
