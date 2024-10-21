@@ -2,45 +2,62 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { deleteUserApi, fetchAllUsersApi, fetchUserByIdApi, loginUserApi, logoutUserApi, postNewUserApi } from "../../ApiServices/UserService";
 
 const fetchAllUsers = createAsyncThunk("user/fetchAllUsers", async () => {
-    return fetchAllUsersApi();
-  }
+  return fetchAllUsersApi();
+}
 );
 
 const fetchUserById = createAsyncThunk("user/fetchUserById", async (id) => {
-    return fetchUserByIdApi(id);
-  }
+  return fetchUserByIdApi(id);
+}
 );
 
 const postNewUser = createAsyncThunk("user/postNewUser", async (data) => {
-    return postNewUserApi(data);
-  }
+  return postNewUserApi(data);
+}
 );
 
 const deleteUser = createAsyncThunk("user/deleteUser", async (id) => {
-    return deleteUserApi(id);
-  }
+  return deleteUserApi(id);
+}
 );
 
-const loginUser = createAsyncThunk("user/loginUser",  async (data) => {
-    return loginUserApi(data);
-  }
+const loginUser = createAsyncThunk("user/loginUser", async (data) => {
+  return loginUserApi(data);
+}
 );
 
-const logoutUser = createAsyncThunk("user/logoutUser",  async () => {
-  console.log("hello")
-    return logoutUserApi();
-  }
+const logoutUser = createAsyncThunk("user/logoutUser", async () => {
+  return logoutUserApi();
+}
 );
+
+const setUserInLs = (state) => {
+  localStorage.setItem("userAuth", JSON.stringify(state));
+};
+
+const getUserFromLS = () => {
+  const storedState = localStorage.getItem("userAuth");
+
+  if (storedState) {
+    try {
+      return JSON.parse(storedState);
+    } catch (error) {
+      console.error("Failed to parse auth data from localStorage", error);
+      return null;
+    }
+  }
+  return null;
+};
 
 export const userSlice = createSlice({
   name: "user",
   initialState: {
     allUserData: [],
-    singleUserData: null,
-    isAuthenticated: false,
+    singleUserData: getUserFromLS(),
     isLoading: false,
     error: null,
-    invalidRoleError: false
+    invalidRoleError: false,
+    isAuthenticated: false,
   },
   reducers: {
     notAdminError: (state, action) => {
@@ -54,7 +71,7 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-    // GET ALL
+      // GET ALL
       .addCase(fetchAllUsers.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -88,6 +105,7 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(postNewUser.fulfilled, (state, action) => {
+        state.isAuthenticated = true;
         state.isLoading = false;
       })
       .addCase(postNewUser.rejected, (state, action) => {
@@ -107,7 +125,7 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.error = "Error while deleting user";
       })
-      
+
       // LOGIN
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -115,12 +133,13 @@ export const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.singleUserData = action.payload
-        state.isAuthenticated = true;
         state.isLoading = false;
+        setUserInLs(state.singleUserData);
+        state.isAuthenticated = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error ="Error while logging in"
+        state.error = "Error while logging in"
       })
 
       // LOGOUT
@@ -129,8 +148,10 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(logoutUser.fulfilled, (state, action) => {
-        state.isAuthenticated = false;
         state.isLoading = false;
+        localStorage.removeItem('userAuth');
+        state.singleUserData = null;
+        state.isAuthenticated = false;
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;

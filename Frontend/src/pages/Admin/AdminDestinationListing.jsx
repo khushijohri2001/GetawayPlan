@@ -7,7 +7,6 @@ import { fetchAllDestinations } from '../../redux/slices/destinationSlice';
 const AdminDestinationListing = () => {
   const { allDestinationData } = useSelector((store) => store.destination);
 
-
   const dispatch = useDispatch();
 
   useEffect(() => {

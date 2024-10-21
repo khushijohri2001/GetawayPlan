@@ -1,12 +1,21 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import { openPopup } from "../../redux/slices/tourPackageSlice";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllBookings, postNewBooking } from "../../redux/slices/bookingSlice";
+import useCheckBooking from "../../Hooks/useCheckBooking";
 
-const TourPackageCard = ({ data }) => {
-  const { image, name, description, price, category, duration } = data || {};
+const TourPackageCard = ({ data, userId }) => {
+  
+  const { _id, image, name, description, price, category, duration } = data || {};
+  const {isBooked} = useCheckBooking(data._id, userId);
   
   const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(fetchAllBookings())
+  // }, [])
+
+  console.log(isBooked);
 
   return (
     <div className="relative flex flex-col justify-between my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
@@ -42,6 +51,7 @@ const TourPackageCard = ({ data }) => {
         <button
           className="rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           type="button"
+          onClick={() => dispatch(postNewBooking({user: userId, tourPackage: _id}))}
         >
           Book Now
         </button>

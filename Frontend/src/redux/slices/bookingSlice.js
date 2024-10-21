@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { deleteBookingApi, fetchAllBookingsApi, fetchBookingByIdApi, postNewBookingApi } from "../../ApiServices/BookingService";
 
-const fetchAllBookings = createAsyncThunk("booking/fetchAllBooking", async () => {
+const fetchAllBookings = createAsyncThunk("booking/fetchAllBookings", async () => {
     return fetchAllBookingsApi();
   }
 );
@@ -34,15 +34,15 @@ export const bookingSlice = createSlice({
     builder
 
     // GET ALL
-      .addCase(fetchAllBooking.pending, (state) => {
+      .addCase(fetchAllBookings.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchAllBooking.fulfilled, (state, action) => {
+      .addCase(fetchAllBookings.fulfilled, (state, action) => {
         state.allBookingData = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchAllBooking.rejected, (state, action) => {
+      .addCase(fetchAllBookings.rejected, (state, action) => {
         console.error(
           "Error while fetching all bookings:",
           action.error.message

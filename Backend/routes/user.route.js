@@ -29,7 +29,7 @@ router.get("/singleUser/:id", async (req, res) => {
 router.post("/new", async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        
+
         const newUser = await User.create({ ...req.body, password: hashedPassword })
         await newUser.save()
         res.status(201).json({ message: "User Added" })
@@ -43,29 +43,30 @@ router.post("/new", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
-        
+
 
         if (!user) {
             return res.status(400).json({ message: "User Not Found" })
         }
-        
+
+
         const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
 
         if (!isPasswordMatch) {
             return res.status(400).json({ message: "Invalid Password" })
         }
-        
-        // const token = generateToken(user);
-    
+
+        const token = generateToken(user);
+
         res
-            // .cookie("auth_token", token, {
-            //     httpOnly: true,
-            //     secure: false,
-            //     sameSite: "none",
-            // })
+            .cookie("auth_token", token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "none",
+            })
             .status(201).
             json(user);
-                               
+
 
     } catch (error) {
         res.status(500).json({ message: error.message })
@@ -75,9 +76,7 @@ router.post("/login", async (req, res) => {
 // LOGOUT
 router.get("/logout", async (req, res) => {
     try {
-        console.log(req.cookies);
-        
-        res.clearCookie("auth_token").status(201).json({ message: "User Logged out" }); 
+        res.clearCookie("auth_token").status(201).json({ message: "User Logged out" });
 
     } catch (error) {
         res.status(500).json({ message: error.message })

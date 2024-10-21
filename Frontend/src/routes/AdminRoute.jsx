@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 const AdminRoute = ({element}) => {
-    const {singleUserData, isAuthenticated} = useSelector((store) => store.user);
+    const {singleUserData} = useSelector((store) => store.user);
 
     const isAdmin = singleUserData?.role === 'Admin'
 
-    return isAuthenticated && isAdmin ? element : <Navigate to="/admin/login" />;
+    return singleUserData && isAdmin ? element : <Navigate to="/admin/login" />;
 }
 
 export default AdminRoute

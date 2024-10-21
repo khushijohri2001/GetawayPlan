@@ -2,9 +2,7 @@ import axios from "axios";
 import { baseUrl } from "../utils/apis";
 
 export const fetchAllBookingsApi = async () => {
-  const response = await axios.get(baseUrl + "/booking/all", {
-    withCredentials: true,
-  });
+  const response = await axios.get(baseUrl + "/booking/all");
 
   return response.data;
 };
@@ -16,9 +14,7 @@ export const fetchBookingByIdApi = async (id) => {
 };
 
 export const postNewBookingApi = async (data) => {
-  const response = await axios.post(baseUrl + "/booking/new", data, {
-    withCredentials: true,
-  });
+  const response = await axios.post(baseUrl + "/booking/new", data);
 
   return response.data;
 };

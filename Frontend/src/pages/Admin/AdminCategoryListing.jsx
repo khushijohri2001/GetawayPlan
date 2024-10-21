@@ -6,12 +6,12 @@ import { fetchAllCategories } from '../../redux/slices/categorySlice';
 
 const AdminCategoryListing = () => {
     const { allCategoryData } = useSelector((store) => store.category);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchAllCategories());
-    }, [])
+        // console.log('i am groot')
+    }, [dispatch])
 
     return (
         <div className='p-6 w-full'>

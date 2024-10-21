@@ -30,7 +30,7 @@ router.post("/new", async (req, res) => {
     try {
         const newCategory = new Category({ ...req.body });
         await newCategory.save()
-        res.status(201).json({ message: "Category Added" })
+        res.status(201).json({ message: "Category Added", newCategory })
     } catch (error) { 
         res.status(500).json({ message: error.message }) 
     }
