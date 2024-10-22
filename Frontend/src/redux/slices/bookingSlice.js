@@ -2,28 +2,30 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { deleteBookingApi, fetchAllBookingsApi, fetchBookingByIdApi, postNewBookingApi, updateBookingApi } from "../../ApiServices/BookingService";
 
 const fetchAllBookings = createAsyncThunk("booking/fetchAllBookings", async () => {
-    return fetchAllBookingsApi();
-  }
+  return fetchAllBookingsApi();
+}
 );
 
 const fetchBookingById = createAsyncThunk("booking/fetchBookingById", async (id) => {
-    return fetchBookingByIdApi(id);
-  }
+  return fetchBookingByIdApi(id);
+}
 );
 
 const postNewBooking = createAsyncThunk("booking/postNewBooking", async (data) => {
-    return postNewBookingApi(data);
-  }
+  return postNewBookingApi(data);
+}
 );
 
 const deleteBooking = createAsyncThunk("booking/deleteBooking", async (id) => {
-    return deleteBookingApi(id);
-  }
+  return deleteBookingApi(id);
+}
 );
 
-const updateBooking = createAsyncThunk("booking/updateBooking", async ({id, status}) => {
-    return updateBookingApi(id, status);
-  }
+const updateBooking = createAsyncThunk("booking/updateBooking", async (action) => {
+  const { id, status } = action;
+ 
+  return updateBookingApi(id, status);
+}
 );
 
 export const bookingSlice = createSlice({
@@ -38,7 +40,7 @@ export const bookingSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-    // GET ALL
+      // GET ALL
       .addCase(fetchAllBookings.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -115,12 +117,9 @@ export const bookingSlice = createSlice({
       })
       .addCase(updateBooking.fulfilled, (state, action) => {
         state.isLoading = false;
-        const bookedTourPackage = state.allBookingData.find((booking) => booking._id === action.payload.id);
-        if (bookedTourPackage) {
-          bookedTourPackage.status = action.payload.status
-          // state.allBookingData[index] = action.payload; 
-        }
+        state.allBookingData =state.allBookingData.map((el)=>el._id===action.payload.id?{...el,status:action.payload.status}:el)
       })
+
       .addCase(updateBooking.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;

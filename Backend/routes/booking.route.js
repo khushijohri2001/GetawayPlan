@@ -49,27 +49,20 @@ router.delete("/:id", async (req, res) => {
 });
 
 // UPDATED
-router.put("/update/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { action } = req.body;
+    const  {status} = req.body
 
-    console.log(id);
-    
-
-    const booking = await Booking.findById(id);
+    if (!status || !["accepted", "rejected"].includes(status)) {
+      return res.status(400).json({ message: "Invalid status value" });
+    }
+    const booking = await Booking.findByIdAndUpdate(id, {...req.body, status: status}).populate('user').populate('tourPackage');
 
     if (!booking) {
       return res.status(404).json({ message: "Booking not found" });
     }
-
-    if (!action || !["approved", "rejected"].includes(action)) {
-      return res.status(400).json({ message: "Invalid status value" });
-    }
-
-    booking.status = action;
-    await booking.save();
-
+    
     return res
       .status(200)
       .json({ message: "Booking updated successfully", booking });
