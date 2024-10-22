@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
-import App from "../App"
+import App from "../App";
 import TourPackages from "../pages/TourPackages";
 import SingleTourPackage from "../pages/SingleTourPackage";
 import About from "../pages/About";
@@ -21,132 +21,135 @@ import AdminUserListing from "../pages/Admin/AdminUserListing";
 import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminBookingListing from "../pages/Admin/AdminBookingListing";
+import AllTourPackages from "../pages/AllTourPackages";
 
 export const AllRoutes = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: <Wrapper />,
+    children: [
+      {
         path: "/",
-        element: <Wrapper/>,
+        element: <App />,
         children: [
-            {
-                path: "/",
-                element: <App />,
-                children: [
-                    {
-                        index: true,
-                        element: <Home />
-                    },
-                    {
-                        path: ":categoryId",
-                        children: [
-                            {
-                                index: true,
-                                element: <ProtectedRoute element={<Destinations/>} />,
-                            },
-                            {
-                                path: ":destinationId",
-                                element: <ProtectedRoute element={<TourPackages />} />
-                            }
-                        ]
-                    },
-                    {
-                        path: "about",
-                        element: <About />
-                    },
-                    {
-                        path: "contact",
-                        element: <Contact />
-                    },
-                    {
-                        path: "login",
-                        element: <Login/>
-                    },
-                    {
-                        path: "signup",
-                        element: <SignUp/>
-                    },
-                ]
-            },
-            {
-                path: "admin",
-                element: <AdminRoute element={<AdminWrapper />} />,
-                children: [
-                    {
-                        index: true,
-                        element: <AdminDashboard />
-                    },
-                    {
-                        path: "category",
-                        children: [
-                            {
-                                index: true,
-                                element: <AdminCategoryListing />,
-                            },
-                            {
-                                path: "add-category",
-                                element: <AddCategory />
-                            },
-                        ]
-                    },
-                    {
-                        path: "destination",
-                        children: [
-                            {
-                                index: true,
-                                element: <AdminDestinationListing />,
-                            },
-                            {
-                                path: "add-destination",
-                                element: <AddDestination />
-                            },
-                        ]
-                    },
-                    {
-                        path: "tour-package",
-                        children: [
-                            {
-                                index: true,
-                                element: <AdminTourPackageListing />,
-                            },
-                            {
-                                path: "add-tour-package",
-                                element: <AddTourPackage />
-                            }
-                        ]
-                    },
-                    {
-                        path: "user",
-                        children: [
-                            {
-                                index: true,
-                                element: <AdminUserListing />,
-                            },
-                            {
-                                path: "add-user",
-                                element: <AddTourPackage />
-                            }
-                        ]
-                    },
-                    {
-                        path: "booking",
-                        children: [
-                            {
-                                index: true,
-                                element: <AdminBookingListing />,
-                            }
-                        ]
-                    },
-                ]
-            },
-            {
-                path: "admin/login",
-                element: <Login/>
-            },
-            {
-                path: "admin/signup",
-                element: <SignUp/>
-            },
-        ]
-    },
-    
-
-])
+          {
+            index: true,
+            element: <Home />,
+          },
+          {
+            path: ":categoryId",
+            children: [
+              {
+                index: true,
+                element: <ProtectedRoute element={<Destinations />} />,
+              },
+              {
+                path: ":destinationId",
+                element: <ProtectedRoute element={<TourPackages />} />,
+              },
+            ],
+          },
+          {
+            path: "/all-tour-packages",
+            element: <AllTourPackages />,
+          },
+          {
+            path: "about",
+            element: <About />,
+          },
+          {
+            path: "contact",
+            element: <Contact />,
+          },
+          {
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "signup",
+            element: <SignUp />,
+          },
+        ],
+      },
+      {
+        path: "admin",
+        element: <AdminRoute element={<AdminWrapper />} />,
+        children: [
+          {
+            index: true,
+            element: <AdminDashboard />,
+          },
+          {
+            path: "category",
+            children: [
+              {
+                index: true,
+                element: <AdminCategoryListing />,
+              },
+              {
+                path: "add-category",
+                element: <AddCategory />,
+              },
+            ],
+          },
+          {
+            path: "destination",
+            children: [
+              {
+                index: true,
+                element: <AdminDestinationListing />,
+              },
+              {
+                path: "add-destination",
+                element: <AddDestination />,
+              },
+            ],
+          },
+          {
+            path: "tour-package",
+            children: [
+              {
+                index: true,
+                element: <AdminTourPackageListing />,
+              },
+              {
+                path: "add-tour-package",
+                element: <AddTourPackage />,
+              },
+            ],
+          },
+          {
+            path: "user",
+            children: [
+              {
+                index: true,
+                element: <AdminUserListing />,
+              },
+              {
+                path: "add-user",
+                element: <AddTourPackage />,
+              },
+            ],
+          },
+          {
+            path: "booking",
+            children: [
+              {
+                index: true,
+                element: <AdminBookingListing />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "admin/login",
+        element: <Login />,
+      },
+      {
+        path: "admin/signup",
+        element: <SignUp />,
+      },
+    ],
+  },
+]);

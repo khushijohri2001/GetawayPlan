@@ -3,34 +3,40 @@ import DestinationCard from "../components/Cards/DestinationCard";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllDestinations } from "../redux/slices/destinationSlice";
+import Filter from "../components/Filters/Filter";
 
 const Destinations = () => {
   const { categoryId } = useParams();
-  const { allDestinationData } = useSelector((store) => store.destination);
+  const { filteredDestinations } = useSelector((store) => store.destination);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchAllDestinations());
   }, []);
+  
 
   return (
-    <div>
-      <div>Filter</div>
+    <div className="flex gap-16 p-8">
+     <div>
+        <Filter/>
+      </div>
       <div>
-        <h2>Destinations</h2>
-        <div className="flex flex-wrap gap-6">
-          {allDestinationData &&
-            allDestinationData.length > 0 &&
+        <h2 className="text-2xl text-cyan-900 font-bold my-4 mb-8">
+          {categoryId === "destinations" ? "All" : categoryId} Destinations
+        </h2>
+        <div className="flex flex-wrap gap-10">
+          {filteredDestinations &&
+            filteredDestinations.length > 0 &&
             (categoryId === "destinations"
-              ? allDestinationData.map((destination) => (
+              ? filteredDestinations.map((destination) => (
                   <DestinationCard
                     key={destination._id}
                     route={categoryId}
                     data={destination}
                   />
                 ))
-              : allDestinationData
+              : filteredDestinations
                   .filter((ele) =>
                     ele.category.some((elem) => elem.name === categoryId)
                   )

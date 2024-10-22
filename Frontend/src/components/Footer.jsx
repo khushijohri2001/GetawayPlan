@@ -3,11 +3,11 @@ import { logo } from "../utils/constants";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-cyan-300 to-cyan-700 shadow text-cyan-200">
+    <footer className="bg-gradient-to-r from-cyan-500 to-cyan-900 shadow text-cyan-200">
       <div className="w-full mx-auto p-4 md:py-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between px-8">
           <Link to="/">
-            <div className="flex gap-2">
+            <div className="flex gap-2 ">
               <img src={logo} className="h-8" alt="Getaway Trip Logo" />
               <span className="self-center text-2xl text-cyan-800 font-semibold whitespace-nowrap">
                 Getaway Plan

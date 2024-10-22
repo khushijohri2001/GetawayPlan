@@ -9,13 +9,13 @@ const Header = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="bg-gradient-to-r from-cyan-300 to-cyan-700 py-4 px-10 flex justify-between items-center sticky top-0 z-50">
+    <div className="bg-gradient-to-r from-cyan-500 to-cyan-900 py-4 px-16 flex justify-between items-center sticky top-0 z-50 shadow-md">
       <img
         src={logo}
         alt="Logo"
         className="w-16 rounded"
       />
-      <ul className="flex gap-4 text-cyan-200 text-lg">
+      <ul className="flex items-center gap-4 text-cyan-200 text-lg">
         <li className="hover:text-white">
           <Link to="/">Home</Link>
         </li>
@@ -23,7 +23,7 @@ const Header = () => {
           <Link to="/destinations">Destinations</Link>
         </li>
         <li className="hover:text-white">
-          <Link to="/tour-packages">Packages</Link>
+          <Link to="/all-tour-packages">Packages</Link>
         </li>
         <li className="hover:text-white">
           <Link to="/about">About</Link>
@@ -33,7 +33,7 @@ const Header = () => {
         </li>
 
         {
-          singleUserData ? <li className="hover:text-white" onClick={() => dispatch(logoutUser())}>Logout</li> : <li className="hover:text-white"><Link to="/login">Login</Link></li>
+          singleUserData ? <li className="bg-white text-cyan-700 py-2 px-4 rounded-md hover:text-white" onClick={() => dispatch(logoutUser())}>Logout</li> : <li className="bg-white text-cyan-700 py-2 px-4 rounded-md hover:text-white"><Link to="/login">Login</Link></li>
         }
 
       </ul>

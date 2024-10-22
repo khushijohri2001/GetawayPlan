@@ -1,31 +1,62 @@
+import { useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { SlCalender } from "react-icons/sl";
+import Slider from "@mui/material/Slider";
 
 const Search = () => {
-    return (
-        <div className='my-8 flex'>
-            <div className='min-w-52 w-full h-[2.3rem] border border-cyan-800 bg-white  flex items-center justify-between px-2'>
-                <FaLocationDot className="text-lg" />
-                <input type="text" className='w-full h-full ml-2' placeholder="Type your Destination" />
-            </div>
+  const [range, setRange] = useState([2000, 200000]);
+  function handleChanges(event, newValue) {
+    setRange(newValue);
+  }
 
-            <select className='min-w-52 w-full p-2 border-y border-cyan-800 bg-white'>
-                <option value="">Select Duration</option>
-                <option value="1-3 Days">1-3 Days</option>
-                <option value="5-7 Days">5-7 Days</option>
-                <option value="10-12 Days">10-12 Days</option>
-                <option value="15 Days and more">14 Days and more</option>
-                <option value="Not Decided">Not Decided</option>
-            </select>
-
-            <div className='min-w-52 w-full h-[2.3rem] border border-cyan-800 bg-white  flex items-center justify-between px-2'>
-                <SlCalender className="text-lg" />
-                <input type="text" className='w-full h-full ml-2' placeholder="Choose a Date" />
-            </div>
-
-            <button className='bg-cyan-500 text-white font-bold px-8 py-1 h-[2.25rem] min-w-48 w-full'>Explore</button>
+  return (
+    <div className="relative my-16 bg-white h-30 py-12 pb-16 px-8 rounded-md">
+      <div className="flex justify-between gap-8 w-full">
+        <div className="flex flex-col gap-4">
+          <label htmlFor="">Search your destination</label>
+          <div className="flex items-center justify-between min-w-80 w-full h-[2.3rem] bg-gray-300 px-4 rounded-2xl border-transparent ">
+            <input
+              type="text"
+              className="w-full h-full bg-gray-300 focus:outline-none"
+              placeholder="Type your Destination "
+            />
+            <FaLocationDot className="text-lg" />
+          </div>
         </div>
-    )
-}
 
-export default Search
+        <div className="flex flex-col gap-4">
+          <label htmlFor="">Select Duration</label>
+          <select className="flex items-center justify-between min-w-80 w-full h-[2.3rem] bg-gray-300 px-4 rounded-2xl border-transparent">
+            <option value="">Select Duration</option>
+            <option value="1-3 Days">1-3 Days</option>
+            <option value="5-7 Days">5-7 Days</option>
+            <option value="10-12 Days">10-12 Days</option>
+            <option value="15 Days and more">14 Days and more</option>
+            <option value="Not Decided">Not Decided</option>
+          </select>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <label htmlFor="">
+            The selected range is {range[0]} - {range[1]}
+          </label>
+          <div className="flex items-center justify-between min-w-80 w-full h-[2.3rem] bg-gray-300 px-4 rounded-2xl border-transparent">
+            <Slider
+              value={range}
+              onChange={handleChanges}
+              step={5000}
+              min={2000} 
+              max={200000}
+              valueLabelDisplay="auto"
+            />
+          </div>
+        </div>
+      </div>
+
+      <button className="absolute -bottom-5 right-[40%] bg-cyan-600 text-white font-bold px-16 py-2 rounded-md text-xl hover:bg-cyan-700">
+        Explore
+      </button>
+    </div>
+  );
+};
+
+export default Search;

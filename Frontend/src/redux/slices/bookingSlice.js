@@ -1,31 +1,44 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteBookingApi, fetchAllBookingsApi, fetchBookingByIdApi, postNewBookingApi, updateBookingApi } from "../../ApiServices/BookingService";
+import {
+  deleteBookingApi,
+  fetchAllBookingsApi,
+  fetchBookingByIdApi,
+  postNewBookingApi,
+  updateBookingApi,
+} from "../../ApiServices/BookingService";
 
-const fetchAllBookings = createAsyncThunk("booking/fetchAllBookings", async () => {
-  return fetchAllBookingsApi();
-}
+const fetchAllBookings = createAsyncThunk(
+  "booking/fetchAllBookings",
+  async () => {
+    return fetchAllBookingsApi();
+  }
 );
 
-const fetchBookingById = createAsyncThunk("booking/fetchBookingById", async (id) => {
-  return fetchBookingByIdApi(id);
-}
+const fetchBookingById = createAsyncThunk(
+  "booking/fetchBookingById",
+  async (id) => {
+    return fetchBookingByIdApi(id);
+  }
 );
 
-const postNewBooking = createAsyncThunk("booking/postNewBooking", async (data) => {
-  return postNewBookingApi(data);
-}
+const postNewBooking = createAsyncThunk(
+  "booking/postNewBooking",
+  async (data) => {
+    return postNewBookingApi(data);
+  }
 );
 
 const deleteBooking = createAsyncThunk("booking/deleteBooking", async (id) => {
   return deleteBookingApi(id);
-}
-);
+});
 
-const updateBooking = createAsyncThunk("booking/updateBooking", async (action) => {
-  const { id, status } = action;
- 
-  return updateBookingApi(id, status);
-}
+const updateBooking = createAsyncThunk(
+  "booking/updateBooking",
+  async (action) => {
+    const { id, status } = action;
+
+    return updateBookingApi(id, status);
+  }
 );
 
 export const bookingSlice = createSlice({
@@ -117,7 +130,11 @@ export const bookingSlice = createSlice({
       })
       .addCase(updateBooking.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.allBookingData =state.allBookingData.map((el)=>el._id===action.payload.id?{...el,status:action.payload.status}:el)
+        state.allBookingData = state.allBookingData.map((el) =>
+          el._id === action.payload.id
+            ? { ...el, status: action.payload.status }
+            : el
+        );
       })
 
       .addCase(updateBooking.rejected, (state, action) => {
@@ -129,4 +146,10 @@ export const bookingSlice = createSlice({
 
 export default bookingSlice.reducer;
 // export const { } = bookingSlice.actions;
-export { fetchAllBookings, fetchBookingById, postNewBooking, deleteBooking, updateBooking };
+export {
+  fetchAllBookings,
+  fetchBookingById,
+  postNewBooking,
+  deleteBooking,
+  updateBooking,
+};

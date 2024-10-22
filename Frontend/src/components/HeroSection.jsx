@@ -2,11 +2,16 @@ import Search from "./Search"
 
 const HeroSection = () => {
   return (
-    <div className='bg-gradient-to-r from-cyan-300 to-cyan-700 py-4 px-10 h-[70%]' >
-        <div className="w-3/4 m-auto my-24">
-          <p className="text-cyan-700 text-lg">Our Packages</p>
-          <h1 className="text-white font-bold text-4xl">Search Your Holidays</h1>
+    <div className='bg-gradient-to-r h-screen' >
+        <div className="absolute bottom-44 right-48 z-30">
+          <p className="text-sky-300 font-semibold text-lg">OUR PACKAGES</p>
+          <h1 className="text-white font-bold text-4xl">Search Your <span className="underline underline-offset-8 decoration-cyan-400">Holidays</span> </h1>
           <Search/>
+        </div>
+
+        <div className="relative ">
+          <div className="bg-sky-950 w-full h-screen absolute opacity-55"></div>
+          <img src="https://images.unsplash.com/photo-1597313956715-a3fe32a86188?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" className="w-full h-screen" />
         </div>
     </div>
   )

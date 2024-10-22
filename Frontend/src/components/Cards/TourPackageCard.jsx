@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllBookings, postNewBooking } from "../../redux/slices/bookingSlice";
+import { useDispatch } from "react-redux";
+import { postNewBooking } from "../../redux/slices/bookingSlice";
 import useCheckBooking from "../../Hooks/useCheckBooking";
 
 const TourPackageCard = ({ data, userId }) => {
@@ -48,7 +47,7 @@ const TourPackageCard = ({ data, userId }) => {
           onClick={() => dispatch(postNewBooking({user: userId, tourPackage: _id}))}
           disabled={isBooked && isBooked?.tourPackage._id === _id}
         >
-         { isBooked && isBooked?.tourPackage._id === _id ? isBooked.status.toUpperCase() : "Book Now"}
+         { isBooked && isBooked?.tourPackage._id === _id ? (isBooked.status === "accepted" && "Booked") || (isBooked.status === "rejected" && "Cancelled") : "Book Now"}
         </button>
       </div>
     </div>

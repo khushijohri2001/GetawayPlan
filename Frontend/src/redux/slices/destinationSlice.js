@@ -27,10 +27,23 @@ export const destinationSlice = createSlice({
   initialState: {
     allDestinationData: [],
     singleDestinationData: null,
+    filteredDestinations: [],
     isLoading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    filterBySearch: (state, action) => {
+      const keyword = action.payload.toLowerCase();
+      if (!keyword) {
+        state.filteredDestinations = [...state.allDestinationData];
+      } else {
+      state.filteredDestinations = state.filteredDestinations.filter(
+        (data) =>
+          data.name.toLowerCase().includes(keyword)
+      );
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
 
@@ -41,6 +54,7 @@ export const destinationSlice = createSlice({
       })
       .addCase(fetchAllDestinations.fulfilled, (state, action) => {
         state.allDestinationData = action.payload;
+        state.filteredDestinations = action.payload;
         state.isLoading = false;
       })
       .addCase(fetchAllDestinations.rejected, (state, action) => {
@@ -107,5 +121,5 @@ export const destinationSlice = createSlice({
 });
 
 export default destinationSlice.reducer;
-export const {  allDestinationData, singleDestinationData} = destinationSlice.actions;
+export const { filterBySearch } = destinationSlice.actions;
 export { fetchAllDestinations, fetchDestinationById, postNewDestination, deleteDestination};
