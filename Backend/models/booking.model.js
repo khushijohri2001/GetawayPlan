@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const bookingSchema = new mongoose.Schema({
     status:{
         type: String, 
-        enum: ['pending', 'rejected', 'approved'],
+        enum: ['pending', 'rejected', 'accepted'],
         default: 'pending'
     },
     user:{

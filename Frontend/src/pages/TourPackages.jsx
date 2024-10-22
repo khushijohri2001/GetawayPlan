@@ -5,7 +5,6 @@ import { useEffect } from "react";
 import { fetchAllTourPackages } from "../redux/slices/tourPackageSlice";
 import TourPackageCard from "../components/Cards/TourPackageCard";
 import { fetchDestinationById } from "../redux/slices/destinationSlice";
-import { fetchAllBookings } from "../redux/slices/bookingSlice";
 
 const TourPackages = () => {
   const { categoryId, destinationId } = useParams();
@@ -13,7 +12,6 @@ const TourPackages = () => {
   const { allTourPackageData } = useSelector((store) => store.tourPackage);
   const { singleDestinationData } = useSelector((store) => store.destination);
   const { singleUserData } = useSelector((store) => store.user);
-  
 
   const dispatch = useDispatch();
 
@@ -21,7 +19,6 @@ const TourPackages = () => {
     dispatch(fetchAllTourPackages());
     dispatch(fetchDestinationById(destinationId));
   }, []);
-
 
 
   return (

@@ -9,7 +9,7 @@ const AdminBookingListing = () => {
 
   useEffect(() => {
     dispatch(fetchAllBookings());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="p-6 w-full">
