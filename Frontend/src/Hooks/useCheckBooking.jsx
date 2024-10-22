@@ -13,14 +13,11 @@ const useCheckBooking = (tourPackageId, userId) => {
     }, [])
 
     useEffect(() => {
-       const existingBooking = allBookingData&&allBookingData.filter((booking) => booking.user._id === userId );
-       setIsBooked(existingBooking);
-
-       const abc = allBookingData&& allBookingData.filter((booking) => booking.tourPackage._id === tourPackageId )
-       console.log(abc) 
-       console.log(tourPackageId);
+       const existingBooking = allBookingData&& allBookingData.filter((booking) => booking.user._id === userId && booking.tourPackage._id === tourPackageId );
        
-    }, [allBookingData])
+       setIsBooked(existingBooking[0]);
+       
+    }, [allBookingData, tourPackageId, userId])
     
 
     return { isBooked }

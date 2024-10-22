@@ -24,3 +24,9 @@ export const deleteBookingApi = async (id) => {
 
   return response.data;
 };
+
+export const updateBookingApi = async (id, action) => {
+  const response = await axios.put(baseUrl + "/booking/update" + id, action);
+
+  return response.data;
+};
