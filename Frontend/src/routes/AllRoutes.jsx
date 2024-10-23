@@ -51,7 +51,7 @@ export const AllRoutes = createBrowserRouter([
           },
           {
             path: "/all-tour-packages",
-            element: <AllTourPackages />,
+            element: <ProtectedRoute element={<AllTourPackages />}  />,
           },
           {
             path: "about",

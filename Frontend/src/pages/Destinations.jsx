@@ -14,12 +14,17 @@ const Destinations = () => {
   useEffect(() => {
     dispatch(fetchAllDestinations());
   }, []);
-  
+
+  const filterCategory = filteredDestinations && filteredDestinations
+    .filter((ele) =>
+      ele.category.some((elem) => elem.name === categoryId)
+    )
+
 
   return (
-    <div className="flex gap-16 p-8">
-     <div>
-        <Filter/>
+    <div className="flex gap-16 p-8 min-h-screen">
+      <div>
+       {filterCategory.length > 0 && <Filter />}
       </div>
       <div>
         <h2 className="text-2xl text-cyan-900 font-bold my-4 mb-8">
@@ -30,23 +35,29 @@ const Destinations = () => {
             filteredDestinations.length > 0 &&
             (categoryId === "destinations"
               ? filteredDestinations.map((destination) => (
+                <DestinationCard
+                  key={destination._id}
+                  route={categoryId}
+                  data={destination}
+                />
+              ))
+              : (filterCategory.length > 0 ? filteredDestinations
+                .filter((ele) =>
+                  ele.category.some((elem) => elem.name === categoryId)
+                )
+                .map((destination) => (
                   <DestinationCard
                     key={destination._id}
                     route={categoryId}
                     data={destination}
                   />
                 ))
-              : filteredDestinations
-                  .filter((ele) =>
-                    ele.category.some((elem) => elem.name === categoryId)
-                  )
-                  .map((destination) => (
-                    <DestinationCard
-                      key={destination._id}
-                      route={categoryId}
-                      data={destination}
-                    />
-                  )))}
+                :
+                <p>No Destinations Available</p>
+              )
+            )
+
+          }
         </div>
       </div>
     </div>

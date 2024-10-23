@@ -34,7 +34,9 @@ const Header = () => {
         </li>
 
         {
-          singleUserData ? <li className="bg-white text-cyan-700 py-2 px-4 rounded-md hover:text-white" onClick={() => dispatch(logoutUser())}>Logout</li> : <li className="bg-white text-cyan-700 py-2 px-4 rounded-md hover:text-white"><Link to="/login">Login</Link></li>
+          singleUserData ?
+            <li className="bg-white text-cyan-700 py-2 px-4 rounded-md hover:text-white" onClick={() => dispatch(logoutUser())}>Logout</li>
+            : <li className="bg-white text-cyan-700 py-2 px-4 rounded-md hover:text-cyan-800 hover:bg-slate-100"><Link to="/login">Login</Link></li>
         }
 
       </ul>

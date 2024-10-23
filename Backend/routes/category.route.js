@@ -1,6 +1,5 @@
 import express from "express";
 import { Category } from "../models/category.model.js";
-import { adminMiddleware } from "../middleware/adminMiddleware.js";
 
 const router = express.Router();
 

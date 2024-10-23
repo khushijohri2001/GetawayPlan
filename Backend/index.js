@@ -10,10 +10,7 @@ import userRouter from "./routes/user.route.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
-// Update mongo password in env = khushijohri2001, ZkjRqdeIT5cEarwX, WioL4io4n9N8XLhi
 
-// MONGODB="mongodb+srv://khushijohri01:khushi123@getawayplan.hzqxn.mongodb.net/getaway?retryWrites=true&w=majority&appName=getawayplan"
-// JWT_SECRET="69e6b0e9c37d0a814b9fd232e290ba42d8d0c0db974fda14e8eb2a9c0497b56a"
 dotenv.config();
 const app = express();
 
@@ -32,6 +29,8 @@ mongoose.connection.on("disconnected", () => {
 
 app.use(cookieParser());
 
+app.use(express.json())
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({
@@ -40,7 +39,6 @@ app.use(cors({
     sameSite:"None"
 }));
 
-app.use(express.json())
 
 // Middleware
 app.use("/auth", authRouter)
