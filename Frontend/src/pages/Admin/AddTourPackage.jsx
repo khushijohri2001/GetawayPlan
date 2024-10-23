@@ -50,9 +50,6 @@ const AddTourPackage = () => {
     }
   }
 
-  const checkBoxHandler = (id) => {
-    setChecked(!checked)
-  }
 
   useEffect(() => {
     dispatch(fetchAllCategories())
