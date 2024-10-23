@@ -10,11 +10,12 @@ const Header = () => {
 
   return (
     <div className="bg-gradient-to-r from-cyan-500 to-cyan-900 py-4 px-16 flex justify-between items-center sticky top-0 z-50 shadow-md">
-      <img
+      <Link to="/"><img
         src={logo}
         alt="Logo"
         className="w-16 rounded"
       />
+      </Link>
       <ul className="flex items-center gap-4 text-cyan-200 text-lg">
         <li className="hover:text-white">
           <Link to="/">Home</Link>

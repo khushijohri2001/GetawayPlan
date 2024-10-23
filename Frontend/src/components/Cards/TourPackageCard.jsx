@@ -47,7 +47,7 @@ const TourPackageCard = ({ data, userId }) => {
           onClick={() => dispatch(postNewBooking({user: userId, tourPackage: _id}))}
           disabled={isBooked && isBooked?.tourPackage._id === _id}
         >
-         { isBooked && isBooked?.tourPackage._id === _id ? (isBooked.status === "accepted" && "Booked") || (isBooked.status === "rejected" && "Cancelled") : "Book Now"}
+         { isBooked && isBooked?.tourPackage._id === _id ? (isBooked.status === "accepted" && "Booked") || (isBooked.status === "rejected" && "Cancelled") || (isBooked.status === "pending" && "Pending") : "Book Now"}
         </button>
       </div>
     </div>

@@ -2,23 +2,23 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { deleteTourPackageApi, fetchAllTourPackagesApi, fetchTourPackagesByIdApi, postNewTourPackageApi } from "../../ApiServices/TourPackageService";
 
 const fetchAllTourPackages = createAsyncThunk("tourPackage/fetchAllTourPackages", async () => {
-    return fetchAllTourPackagesApi();
-  }
+  return fetchAllTourPackagesApi();
+}
 );
 
 const fetchTourPackageById = createAsyncThunk("tourPackage/fetchTourPackageById", async (id) => {
-    return fetchTourPackagesByIdApi(id);
-  }
+  return fetchTourPackagesByIdApi(id);
+}
 );
 
 const postNewTourPackage = createAsyncThunk("tourPackage/postNewTourPackage", async (data) => {
-    return postNewTourPackageApi(data);
-  }
+  return postNewTourPackageApi(data);
+}
 );
 
 const deleteTourPackage = createAsyncThunk("tourPackage/deleteTourPackage", async (id) => {
-    return deleteTourPackageApi(id);
-  }
+  return deleteTourPackageApi(id);
+}
 );
 
 
@@ -26,23 +26,36 @@ export const tourPackageSlice = createSlice({
   name: "tourPackage",
   initialState: {
     allTourPackageData: [],
+    filteredTourPackage: [],
     singleTourPackageData: null,
     isLoading: false,
     error: null,
     isPopupOpen: false,
   },
   reducers: {
-    openPopup: (state, action) => {
-      state.isPopupOpen = true
-    },
-    closePopup: (state, action) => {
-      state.isPopupOpen = false
+    filteringTourPackages: (state, action) => {
+      let destinationInput = action.payload.destination;
+      const durationInput = action.payload.duration.split("-");
+      let typeInput = action.payload.type;
+
+      let filterArr = action.payload.allTourPackageData.filter((el) => {
+
+        let f1 = !destinationInput || el.destination.name.toLowerCase().includes(destinationInput.toLowerCase())
+
+        let f2 = durationInput && durationInput[0] === "all" ? el : (el.duration.days <= durationInput[1] && el.duration.nights >= durationInput[0])
+        
+        let f3 = !typeInput || el.destination.type == typeInput
+
+        return f1 && f2 && f3
+      })
+
+      state.filteredTourPackage = filterArr
     }
   },
   extraReducers: (builder) => {
     builder
 
-    // GET ALL
+      // GET ALL
       .addCase(fetchAllTourPackages.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -115,5 +128,5 @@ export const tourPackageSlice = createSlice({
 });
 
 export default tourPackageSlice.reducer;
-export const { openPopup, closePopup } = tourPackageSlice.actions;
+export const { filteringTourPackages } = tourPackageSlice.actions;
 export { fetchAllTourPackages, fetchTourPackageById, postNewTourPackage, deleteTourPackage };
