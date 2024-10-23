@@ -20,6 +20,13 @@ const TourPackages = () => {
     dispatch(fetchDestinationById(destinationId));
   }, []);
 
+  const filterPackages = allTourPackageData && allTourPackageData
+    .filter(
+      (ele) =>
+        ele?.destination?.name === destinationId &&
+        ele?.category?.name === categoryId
+    )
+
   return (
     <div>
       <div className="relative shadow-xl">
@@ -34,7 +41,7 @@ const TourPackages = () => {
         />
       </div>
 
-     {singleDestinationData?.description && <div className="m-6">
+      {singleDestinationData?.description && <div className="m-6">
         <h4 className="text-cyan-800 text-lg font-bold">
           About {singleDestinationData?.name}
         </h4>
@@ -46,27 +53,25 @@ const TourPackages = () => {
           allTourPackageData.length > 0 &&
           (categoryId === "destinations"
             ? allTourPackageData
-                .filter((ele) => ele?.destination?.name === destinationId)
-                .map((data) => (
-                  <TourPackageCard
-                    key={data._id}
-                    data={data}
-                    userId={singleUserData._id}
-                  />
-                ))
-            : allTourPackageData
-                .filter(
-                  (ele) =>
-                    ele?.destination?.name === destinationId &&
-                    ele?.category?.name === categoryId
-                )
-                .map((data) => (
-                  <TourPackageCard
-                    key={data._id}
-                    data={data}
-                    userId={singleUserData._id}
-                  />
-                )))}
+              .filter((ele) => ele?.destination?.name === destinationId)
+              .map((data) => (
+                <TourPackageCard
+                  key={data._id}
+                  data={data}
+                  userId={singleUserData._id}
+                />
+              ))
+            : filterPackages.length > 0 ?
+            filterPackages.map((data) => (
+                <TourPackageCard
+                  key={data._id}
+                  data={data}
+                  userId={singleUserData._id}
+                />
+              ))
+            :
+            <p className="text-2xl my-8">No Packages Available</p>
+            )}
       </div>
     </div>
   );

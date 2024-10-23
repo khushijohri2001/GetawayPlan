@@ -3,7 +3,7 @@ import Search from "./Search"
 const HeroSection = () => {
   return (
     <div className='bg-gradient-to-r h-screen' >
-        <div className="absolute bottom-28 right-28 z-30">
+        <div className="absolute bottom-16 right-28 z-30">
           <p className="text-sky-300 font-semibold text-lg">OUR PACKAGES</p>
           <h1 className="text-white font-bold text-4xl">Search Your <span className="underline underline-offset-8 decoration-cyan-400">Holidays</span> </h1>
           <Search/>
