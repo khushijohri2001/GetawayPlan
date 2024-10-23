@@ -22,6 +22,7 @@ import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminBookingListing from "../pages/Admin/AdminBookingListing";
 import AllTourPackages from "../pages/AllTourPackages";
+import AllTourPackages from "../pages/AllTourPackages";
 
 export const AllRoutes = createBrowserRouter([
   {

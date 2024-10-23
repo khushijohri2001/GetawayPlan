@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { BookingSvg, CategorySvg, DashboardSvg, DestinationSvg, LoginSvg, Logout, SignUp, TourPackageSvg, UserSvg } from "../../assets/svgs"
+import { BookingSvg, CategorySvg, DashboardSvg, DestinationSvg, Logout, TourPackageSvg, UserSvg } from "../../assets/svgs"
 import { useDispatch } from "react-redux"
 import {  logoutUser } from "../../redux/slices/userSlice";
 
@@ -59,22 +59,6 @@ const SideNav = () => {
                             <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                                 <BookingSvg />
                                 <span className="flex-1 ms-3 whitespace-nowrap">Bookings</span>
-                            </div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/login">
-                            <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                                <LoginSvg />
-                                <span className="flex-1 ms-3 whitespace-nowrap">Login</span>
-                            </div>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/admin/signup">
-                            <div className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-                                <SignUp />
-                                <span className="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
                             </div>
                         </Link>
                     </li>
