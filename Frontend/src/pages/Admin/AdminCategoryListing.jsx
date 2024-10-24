@@ -10,7 +10,6 @@ const AdminCategoryListing = () => {
 
     useEffect(() => {
         dispatch(fetchAllCategories());
-        // console.log('i am groot')
     }, [dispatch])
 
     return (

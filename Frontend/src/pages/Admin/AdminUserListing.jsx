@@ -11,7 +11,7 @@ const AdminUserListing = () => {
 
     useEffect(() => {
         dispatch(fetchAllUsers())
-    })
+    },[dispatch])
 
     return (
         <div className='p-6 w-full'>

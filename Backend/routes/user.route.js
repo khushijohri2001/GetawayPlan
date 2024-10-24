@@ -29,10 +29,10 @@ router.get("/singleUser/:id", async (req, res) => {
 router.post("/new", async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
+        
         const newUser = await User.create({ ...req.body, password: hashedPassword })
         await newUser.save()
-        res.status(201).json({ message: "User Added" })
+        res.status(201).json({ message: "User Added", newUser })
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -86,7 +86,7 @@ router.get("/logout", async (req, res) => {
 // DELETE
 router.delete("/:id", async (req, res) => {
     try {
-        const user = await User.deleteOne({ name: req.params.id });
+        const user = await User.deleteOne({_id: req.params.id });
         res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message })

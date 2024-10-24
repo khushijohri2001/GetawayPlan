@@ -13,7 +13,7 @@ const TourPackageCard = ({ data, userId }) => {
   return (
     <div className="relative flex flex-col justify-between my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
       <div>
-        <div className="relative p-2.5 h-96 overflow-hidden rounded-xl bg-clip-border">
+        <div className="relative p-2.5 h-60 overflow-hidden rounded-xl bg-clip-border">
           <img
             src={image}
             alt="card-image"
@@ -44,7 +44,7 @@ const TourPackageCard = ({ data, userId }) => {
         <button
           className={`rounded-md w-full mt-6 bg-cyan-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-cyan-700 focus:shadow-none active:bg-cyan-700 hover:bg-cyan-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ${isBooked && ((isBooked?.status === "pending" && "bg-amber-600") || (isBooked?.status === "accepted" && "bg-green-600") || (isBooked?.status === "rejected" && "bg-red-600"))}`}
           type="button"
-          onClick={() =>{!isBooked && dispatch(postNewBooking({user: userId, tourPackage: _id}))}}
+          onClick={() =>{dispatch(postNewBooking({user: userId, tourPackage: _id}))}}
           disabled={isBooked && isBooked?.tourPackage._id === _id}
         >
          { isBooked && isBooked?.tourPackage._id === _id ? (isBooked.status === "accepted" && "Booked") || (isBooked.status === "rejected" && "Cancelled") || (isBooked.status === "pending" && "Pending") : "Book Now"}

@@ -90,6 +90,7 @@ export const destinationSlice = createSlice({
         state.error = null;
       })
       .addCase(postNewDestination.fulfilled, (state, action) => {
+        state.allDestinationData = [...state.allDestinationData, action.payload]
         state.isLoading = false;
       })
       .addCase(postNewDestination.rejected, (state, action) => {

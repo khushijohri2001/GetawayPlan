@@ -10,7 +10,7 @@ const Header = () => {
   const {singleUserData} = useSelector((store) => store.user);
 
   return (
-    <div className='flex items-center justify-between p-4 bg-gradient-to-r from-cyan-300 to-cyan-700'>
+    <div className='flex items-center justify-between p-4 bg-gradient-to-r from-cyan-500 to-cyan-900 border-b border-cyan-200'>
         <div className='text-xl font-bold text-cyan-800 capitalize'>
             {currentPath === "admin" ? "Dashbaord" : currentPath}
         </div>

@@ -95,6 +95,7 @@ export const bookingSlice = createSlice({
         state.error = null;
       })
       .addCase(postNewBooking.fulfilled, (state, action) => {
+        state.allBookingData = [...state.allBookingData, action.payload]
         state.isLoading = false;
       })
       .addCase(postNewBooking.rejected, (state, action) => {

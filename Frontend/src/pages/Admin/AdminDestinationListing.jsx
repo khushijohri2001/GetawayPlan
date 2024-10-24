@@ -11,7 +11,7 @@ const AdminDestinationListing = () => {
 
   useEffect(() => {
     dispatch(fetchAllDestinations())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className='p-6 w-full'>

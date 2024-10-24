@@ -96,7 +96,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchUserById.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = "Error while fetching use";
+        state.error = "Error while fetching use" || action.payload.error;
       })
 
       // POST
@@ -105,12 +105,13 @@ export const userSlice = createSlice({
         state.error = null;
       })
       .addCase(postNewUser.fulfilled, (state, action) => {
+        state.allUserData = [...state.allUserData, action.payload]
         state.isAuthenticated = true;
         state.isLoading = false;
       })
       .addCase(postNewUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = "Error while creating new user";
+        state.error = "Error while Creating New User";
       })
 
       // DELETE

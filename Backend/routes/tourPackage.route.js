@@ -29,7 +29,7 @@ router.post("/new", async (req, res) => {
     try {
         const newTourPackage = await TourPackage.create({ ...req.body })
         await newTourPackage.save()
-        res.status(201).json({ message: "Tour Package Added" })
+        res.status(201).json({ message: "Tour Package Added", newTourPackage })
     } catch (error) { 
         res.status(500).json({ message: error.message }) 
     }

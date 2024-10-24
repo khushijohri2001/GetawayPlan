@@ -28,7 +28,7 @@ router.post("/new", async (req, res) => {
     try{
         const newDestination = new Destination({...req.body});
         await newDestination.save()
-        res.status(201).json({ message: "Destination Added" })
+        res.status(201).json({ message: "Destination Added", newDestination})
     } catch(error){
         res.status(500).json({ message: error.message })
     }

@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        // unique: true
     },
     role: {
         type: String,
@@ -25,7 +26,13 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true
-    }
+    },
+    bookings: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "booking"
+        }
+    ]
 }, { timestamps: true });
 
 export const User = new mongoose.model("User", userSchema);

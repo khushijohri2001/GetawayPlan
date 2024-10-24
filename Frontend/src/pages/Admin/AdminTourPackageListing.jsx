@@ -11,7 +11,7 @@ const AdminTourPackageListing = () => {
 
     useEffect(() => {
         dispatch(fetchAllTourPackages())
-    }, [])
+    }, [dispatch])
     
 
     return (
