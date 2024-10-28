@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { updateBooking } from "../../redux/slices/bookingSlice";
 
 const ListingTable = ({ tableHead, lastTableHead, data, obj }) => {
@@ -17,23 +17,28 @@ const ListingTable = ({ tableHead, lastTableHead, data, obj }) => {
 
       for (let key in el) {
         if (dataObj[key]) {
-          if (
-            key === "destination" ||
-            (currentPath[2] === "tour-package" && key === "category")
-          ) {
+          if (key === "destination" || (currentPath[2] === "tour-package" && key === "category")) {
             obj[key] = el[key].name;
-
             continue;
+
           } else if (key === "category") {
+
             obj[key] = el[key].map((ele) => ele.name).join(", ");
+
           } else if (currentPath[2] === "booking") {
             if (key === "user" || key === "tourPackage") {
+
               obj[key] = el[key].name;
+
             } else {
+
               obj[key] = el[key];
+
             }
           } else {
+
             obj[key] = el[key];
+
           }
         }
       }
@@ -48,7 +53,7 @@ const ListingTable = ({ tableHead, lastTableHead, data, obj }) => {
     res && setTableBody(res);
   }, [data, obj]);
 
-  
+
 
   return (
     <div className="shadow-md border border-cyan-700">
@@ -70,7 +75,7 @@ const ListingTable = ({ tableHead, lastTableHead, data, obj }) => {
           {tableBody?.length > 0 &&
             tableBody.map((bodyData, index) => {
               const bodyHead = Object.keys(bodyData);
-              
+
               return (
                 <tr className="bg-white border-b " key={index}>
                   {bodyHead.map((head) => (
@@ -84,7 +89,7 @@ const ListingTable = ({ tableHead, lastTableHead, data, obj }) => {
                       <button
                         className="font-medium mr-4 text-green-600  hover:underline"
                         onClick={() =>
-                          dispatch(updateBooking({id: bodyData._id, status:"accepted"}))
+                          dispatch(updateBooking({ id: bodyData._id, status: "accepted" }))
                         }
                       >
                         Accept
@@ -92,28 +97,32 @@ const ListingTable = ({ tableHead, lastTableHead, data, obj }) => {
                       <button
                         className="font-medium text-red-600  hover:underline"
                         onClick={() =>
-                          dispatch(updateBooking({id: bodyData._id, status:"rejected"}))
+                          dispatch(updateBooking({ id: bodyData._id, status: "rejected" }))
                         }
                       >
-                        Reject 
+                        Reject
                       </button>
                     </td>
                   ) : (
-                    <td className="px-6 py-4">
-                      <a
-                        href="#"
-                        className="font-medium text-blue-600 hover:underline"
-                      >
-                        Add
-                      </a>
-                    </td>
-                  )}
+                    <>
+                    {/* Update add button for each admin page */}
+                      {
+                        currentPath[2] === "category" &&
+                        <td className="px-6 py-4">
+                          <button className='font-medium text-blue-600 hover:underline'>
+                            <Link to="/admin/category/add-category">Add</Link>
+                          </button>
+                        </td>
+                      }
+                    </>
+                  )
+                  }
                 </tr>
               );
             })}
         </tbody>
       </table>
-    </div>
+    </div >
   );
 };
 

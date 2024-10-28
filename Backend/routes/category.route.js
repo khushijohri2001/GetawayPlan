@@ -5,21 +5,21 @@ const router = express.Router();
 
 // GET ALL
 router.get("/all", async (req, res) => {
-    
-    try{
+
+    try {
         const categories = await Category.find();
         res.status(200).json(categories)
-    } catch(error){
-        res.status(500).json({ message: error.message }) 
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
 });
 
 // GET
 router.get("/:id", async (req, res) => {  // Here Id is Name of the category
-    try{
-        const category = await Category.findOne({name:req.params.id});
+    try {
+        const category = await Category.findOne({ name: req.params.id });
         res.status(200).json(category);
-    } catch(error){
+    } catch (error) {
         res.status(500).json({ message: error.message })
     }
 })
@@ -30,19 +30,30 @@ router.post("/new", async (req, res) => {
         const newCategory = new Category({ ...req.body });
         await newCategory.save()
         res.status(201).json({ message: "Category Added", newCategory })
-    } catch (error) { 
-        res.status(500).json({ message: error.message }) 
+    } catch (error) {
+        res.status(500).json({ message: error.message })
     }
 
 });
 
 // DELETE
 router.delete("/:id", async (req, res) => {  // Here Id is Name of the category
-    try{
-        const category = await Category.deleteOne({name:req.params.id});
+    try {
+        const category = await Category.deleteOne({ name: req.params.id });
         res.status(200).json(category);
-    } catch(error){
+    } catch (error) {
         res.status(500).json({ message: error.message })
+    }
+})
+
+// UPDATE
+router.put("/add-destination/:id", async (req, res) => {
+    try {
+        const updatedCatgeory = await Category.findByIdAndUpdate({_id: req.params.id}, {$push: {destinations: req.body.destinations}})
+        res.status(200).json(updatedCatgeory);
+
+    } catch (error) {
+        res.status(500).json({message: error.message})
     }
 })
 

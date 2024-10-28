@@ -22,6 +22,8 @@ import AdminRoute from "./AdminRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminBookingListing from "../pages/Admin/AdminBookingListing";
 import AllTourPackages from "../pages/AllTourPackages";
+import UpdateCategory from "../pages/Admin/UpdateCategory";
+import UpdateDestination from "../pages/Admin/UpdateDestination";
 
 export const AllRoutes = createBrowserRouter([
   {
@@ -90,6 +92,10 @@ export const AllRoutes = createBrowserRouter([
                 path: "add-category",
                 element: <AddCategory />,
               },
+              {
+                path: "update-category",
+                element: <UpdateCategory/>,
+              },
             ],
           },
           {
@@ -102,6 +108,10 @@ export const AllRoutes = createBrowserRouter([
               {
                 path: "add-destination",
                 element: <AddDestination />,
+              },
+              {
+                path: "update-destination",
+                element: <UpdateDestination />,
               },
             ],
           },

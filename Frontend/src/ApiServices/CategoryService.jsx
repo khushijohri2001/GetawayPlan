@@ -28,3 +28,9 @@ export const deleteCategoryApi = async (id) => {
 
   return response.data;
 };
+
+export const updateCategoryApi = async (id, updatedData) => {
+  const response = await axios.update(baseUrl + "/category/add-destination/" + id, updatedData);
+
+  return response.data;
+}
