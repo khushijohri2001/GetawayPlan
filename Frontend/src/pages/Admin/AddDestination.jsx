@@ -24,8 +24,6 @@ const AddDestination = () => {
   const [tagIds, setTagIds] = useState([]);
 
   const { allCategoryData } = useSelector((store) => store.category);
-  const { allTourPackageData } = useSelector((store) =>  store.tourPackage);
-  
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,7 +31,7 @@ const AddDestination = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    dispatch(postNewDestination(formData));
+    dispatch(postNewDestination({ ...formData, category: tagIds }));
     setFormData(init);
     navigate("/admin/destination");
   };
@@ -43,7 +41,7 @@ const AddDestination = () => {
 
     setFormData((data) => ({
       ...data,
-      [name]: name === "category" ? tagIds : value,
+      [name]: value,
     }));
   };
 
@@ -55,6 +53,7 @@ const AddDestination = () => {
       (category) => category._id === value
     ).name;
 
+
     if (!tags.find((tag) => tag === categoryName)) {
       setTags((prevTags) => [...prevTags, categoryName]);
       setTagIds((prevTagIds) => [...prevTagIds, value]);
@@ -64,7 +63,8 @@ const AddDestination = () => {
 
   const onChangeHandler = (e) => {
     tagInputHandler(e);
-    userInputHandler(e);
+    setTimeout(() => { userInputHandler(e) }, 10)
+
   };
 
   useEffect(() => {
@@ -135,9 +135,11 @@ const AddDestination = () => {
             name="category"
             value={formData.category}
             onChange={onChangeHandler}
-            // onChange={userInputHandler}
             className="border border-cyan-800 p-2 w-full"
           >
+            <option value="">
+              Select Category
+            </option>
             {allCategoryData &&
               allCategoryData.length > 0 &&
               allCategoryData.map((category) => (

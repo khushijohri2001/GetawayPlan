@@ -16,7 +16,7 @@ const AllTourPackages = () => {
   return (
     <div className='m-8'>
         <h2 className="text-2xl text-cyan-900 font-bold my-4 mb-8">
-          All Tour Packages
+          Tour Packages
         </h2>
 
 

@@ -14,9 +14,13 @@ export const fetchUserByIdApi = async (id) => {
 };
 
 export const postNewUserApi = async (data) => {
+  try{
   const response = await axios.post(baseUrl + "/user/new", data);
-
-  return response.data;
+  return response.data
+  } catch(error){
+    console.log(error.response.data.message)
+    return error.response.data.message
+  }
 };
 
 export const deleteUserApi = async (id) => {

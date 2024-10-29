@@ -33,6 +33,9 @@ const SignUp = () => {
     setFormData(init);
   };
 
+  console.log(error);
+  
+
   const userInputHandler = (e) => {
     let { name, value } = e.target;
 

@@ -7,8 +7,8 @@ const SideNav = () => {
     const dispatch = useDispatch();
     
     return (
-        <aside id="default-sidebar" className="z-40 w-64 py-4 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-            <div className="h-full px-3 py-4 bg-gray-50">
+        <aside id="default-sidebar" className="z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+            <div className="h-full px-3 pt-8 py-4 bg-gray-50">
                 <div className="flex justify-between pb-5">
                     <h2 className="px-4 font-bold text-cyan-800 text-xl pb-6">I am Admin</h2>
                 </div>

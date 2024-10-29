@@ -97,6 +97,9 @@ export const tourPackageSlice = createSlice({
         state.error = null;
       })
       .addCase(postNewTourPackage.fulfilled, (state, action) => {
+        console.log(action.payload);
+        
+        state.allTourPackageData = [...state.allTourPackageData, action.payload.newTourPackage]
         state.isLoading = false;
       })
       .addCase(postNewTourPackage.rejected, (state, action) => {

@@ -11,11 +11,9 @@ const categorySchema = new mongoose.Schema({
     },
     destinations: [
         {
-            desination: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Destination",
-            },
-        }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Destination",
+        },
     ]
 }, { timestamps: true })
 

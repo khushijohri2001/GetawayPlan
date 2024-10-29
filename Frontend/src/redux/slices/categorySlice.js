@@ -1,24 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteCategoryApi, fetchAllCategoriesApi, fetchCategoryByIdApi, postNewCategoryApi } from "../../ApiServices/CategoryService";
+import { deleteCategoryApi, fetchAllCategoriesApi, fetchCategoryByIdApi, postNewCategoryApi, updateCategoryApi } from "../../ApiServices/CategoryService";
 
 const fetchAllCategories = createAsyncThunk("category/fetchAllCategories", async () => {
-    return fetchAllCategoriesApi();
-  }
+  return fetchAllCategoriesApi();
+}
 );
 
 const fetchCategoryById = createAsyncThunk("category/fetchCategoryById", async (id) => {
-    return fetchCategoryByIdApi(id);
-  }
+  return fetchCategoryByIdApi(id);
+}
 );
 
 const postNewCategory = createAsyncThunk("category/postNewCategory", async (data) => {
-    return postNewCategoryApi(data);
-  }
+  return postNewCategoryApi(data);
+}
 );
 
 const deleteCategory = createAsyncThunk("category/deleteCategory", async (id) => {
-    return deleteCategoryApi(id);
-  }
+  return deleteCategoryApi(id);
+}
+);
+
+const updateCategory = createAsyncThunk("category/updateCategory", async (id, data) => {
+  return updateCategoryApi(id, data);
+}
 );
 
 export const categorySlice = createSlice({
@@ -33,7 +38,7 @@ export const categorySlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-    // GET ALL
+      // GET ALL
       .addCase(fetchAllCategories.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -75,7 +80,7 @@ export const categorySlice = createSlice({
         state.error = null;
       })
       .addCase(postNewCategory.fulfilled, (state, action) => {
-        state.allCategoryData=[...state.allCategoryData,action.payload]
+        state.allCategoryData = [...state.allCategoryData, action.payload]
         state.isLoading = false;
       })
       .addCase(postNewCategory.rejected, (state, action) => {
@@ -102,10 +107,28 @@ export const categorySlice = createSlice({
         );
         state.isLoading = false;
         state.error = action.error.message;
+      })
+
+      // UPDATE
+      .addCase(updateCategory.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(updateCategory.rejected, (state, action) => {
+        console.error(
+          "Error while updating category",
+          action.error.message
+        );
+
+        state.isLoading = false;
+        state.error = null;
       });
   },
 });
 
 export default categorySlice.reducer;
 export const { allCategoryData, singleCategoryData } = categorySlice.actions;
-export { fetchAllCategories, fetchCategoryById, postNewCategory, deleteCategory };
+export { fetchAllCategories, fetchCategoryById, postNewCategory, deleteCategory, updateCategory };

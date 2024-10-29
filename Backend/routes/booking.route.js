@@ -9,6 +9,7 @@ router.get("/all", async (req, res) => {
     const bookings = await Booking.find()
       .populate("user")
       .populate("tourPackage");
+
     res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -19,7 +20,8 @@ router.get("/all", async (req, res) => {
 router.get("/:id", async (req, res) => {
   // Here Id is Name of the category
   try {
-    const booking = await Booking.findOne({ name: req.params.id });
+    const booking = await Booking.findOne({ _id: req.params.id }).populate("user")
+      .populate("tourPackage");;
     res.status(200).json(booking);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -31,7 +33,7 @@ router.post("/new", async (req, res) => {
   try {
     const newBooking = new Booking({ ...req.body });
     await newBooking.save();
-    res.status(201).json({ message: "Booking Added" });
+    res.status(201).json({ message: "Booking Added", newBooking });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

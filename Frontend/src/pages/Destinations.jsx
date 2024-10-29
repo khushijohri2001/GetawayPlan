@@ -24,7 +24,7 @@ const Destinations = () => {
   return (
     <div className="flex gap-16 p-8 min-h-screen">
       <div>
-       {filterCategory.length > 0 && <Filter />}
+       <Filter />
       </div>
       <div>
         <h2 className="text-2xl text-cyan-900 font-bold my-4 mb-8">
